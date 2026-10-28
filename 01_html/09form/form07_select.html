@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>여름 방학 특강 신청</h1>
+  <form>
+    <fieldset>
+      <legend>수강 신청인</legend>
+      <ul>
+        <li>
+          <label>학번 <input type="number" autofocus></label>
+        </li><!-- // -->
+        <li>
+          <label for="name">이름</label>
+          <input type="text" id="name">
+        </li><!-- // -->
+        <li>
+          <label for="major">학과</label>
+          <select id="major" size="3" multiple>
+            <option value="a1">건축공학과1</option>
+            <option value="a2">건축공학과2</option>
+            <option value="a3" selected>건축공학과3</option>
+            <option value="a4">건축공학과4</option>
+            <option value="a5">건축공학과5</option>
+            <option value="a6">건축공학과6</option>
+          </select>
+        </li><!-- // -->
+        <li>
+          <label for="major2">학과2</label>
+          <select id="major2">
+            <optgroup label="공과대학">
+              <option value="b1">기계공학과1</option>
+              <option value="b2">기계공학과2</option>
+              <option value="b3">기계공학과3</option>
+              <option value="b4">기계공학과4</option>
+            </optgroup>
+
+            <optgroup label="인문대학">
+              <option value="c1">사학과</option>
+              <option value="c2">철학과</option>
+              <option value="c3" selected>어문학부</option>
+            </optgroup>
+          </select>
+        </li><!-- // -->
+      </ul>
+
+    </fieldset>
+  </form>
+
+</body>
+
+</html>

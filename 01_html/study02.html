@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .tone {
+      width: 320px;
+      margin: 8px;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 14px;
+      background: #F9FAFE;
+    }
+
+    .slider {
+      width: 200px;
+      height: 20px;
+    }
+    #right {
+      width: 320px;
+      margin: 8px;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 14px;
+      background: #F9FAFE;
+    }
+
+    .box {
+      border: 1px solid #ccc;
+      font-size: 0.8em;
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <form>
+      <section class="item">
+        <section class="tone">
+          <div class="tone-text">
+            <h4>따뜻한</h4>
+            <p>피곤한 사람처럼 무뚝뚝하고 간결해요.</p>
+          </div>
+          <div class="tone-control">
+            <input class="slider" type="range" min="1" max="3" value="1">
+            <output class="box">낮음</output>
+          </div>
+        </section><!-- //section1 -->
+
+        <section class="tone">
+          <div class="tone-text">
+            <h4>유머러스한</h4>
+            <p>은근히 재미있는 사람이 되고싶어요.</p>
+          </div>
+          <div class="tone-control">
+            <input class="slider" type="range" min="1" max="3" id="r1" value="2">
+            <output class="box">낮음</output>
+          </div>
+        </section><!-- //section2 -->
+
+        <section class="tone">
+          <div class="tone-text">
+            <h4>공손한</h4>
+            <p>옆부서 팀원한테 부탁하듯이 적당해요.</p>
+          </div>
+          <div class="tone-control">
+            <input class="slider" type="range" min="1" max="3" id="r1" value="2">
+            <output class="box">낮음</output>
+          </div>
+        </section><!-- //section3 -->
+      </section><!-- //section_left -->
+
+      <section class="item">
+        <h4 class="setting-text">T3님이 설정하신 뉘앙스는</h4>
+        <h4 class="tone-desc">리야드의 신문 칼럼니스트같이 시니컬하고 풍자적인 인상을 줄거에요.</h4>
+      </section><!-- //section_right -->
+    </form>
+
+
+  </main>
+
+</body>
+
+</html>

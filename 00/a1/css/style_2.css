@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header {
+  height: 100px;
+}
+
+.gallary {
+  height: 300px;
+  background: lightcyan;
+}
+
+section {
+  height: 200px;
+}
+
+footer {
+  height: 100px;
+}
+
+nav ul.gnb {
+  height: 60px;
+  display: flex;
+}
+
+nav ul.gnb>li {
+  border: 1px solid #000;
+  justify-content: left;
+}
+

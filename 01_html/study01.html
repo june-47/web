@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>study01</title>
+  <style>
+    main {
+      width: 390px;
+      padding: 16px;
+      height: fit-content;
+    }
+
+    #s1 {
+      margin-bottom: 8px;
+    }
+
+    #info {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #eee;
+    }
+
+    #search_area {
+      border: 1px solid #000;
+      border-radius: 999px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    #dropdown {
+      border: none;
+      font-size: 16px;
+      font-weight: 800;
+      margin: 4px;
+      cursor: pointer;
+    }
+
+    #search {
+      border: none;
+      font-size: 16px;
+      padding-block: 12px;
+      flex: 1;
+      padding-left: 10px;
+      outline: 0;
+    }
+
+    #search-icon {
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-left: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section id="s1">
+      <h3>신청기관 조회</h3>
+      <form id="search_area">
+        <label for="dropdown"></label>
+        <select id="dropdown">
+          <option value="default" selected>구분</option>
+          <option value="city">시</option>
+          <option value="town">군</option>
+          <option value="village">구</option>
+        </select>
+
+        <label for="search"></label>
+        <input type="search" id="search" placeholder="검색어를 입력해주세요">
+
+        <button type="submit" id="search-icon">
+          <img src="./search.svg" alt="search-icon">
+        </button>
+      </form>
+
+      <div id="info">
+        <h4> <img src="./info.svg" alt="info-icon"> 참고</h4>
+        <p>각 기관을 선택하면 해당기관 정보조회가 가능하며, 조회된 접수/처리기관에 대한 실제 민원 접수/처리 가능여부는 해당 기관에 확인해 주시기 바랍니다.</p>
+      </div>
+    </section>
+
+    <section id="s2">
+      <h3>서비스 개요</h3>
+      <div>
+        <div>
+          <h4>신청방법</h4>
+          <p>인터넷, 방문, 무인발급기</p>
+        </div><!-- // -->
+
+        <div>
+          <h4>신청자격</h4>
+          <p>본인 또는 대리인(온라인은 대리인 신청 불가)</p>
+        </div><!-- // -->
+
+        <div>
+          <h4>발급서류</h4>
+          <p>주민등록표 등본(초본)<br>
+            <small>(주민등록법 시행규칙: 별지서식 18,19호)</small>
+          </p>
+        </div><!-- // -->
+
+        <div>
+          <h4>처리기간</h4>
+          <p>즉시(근무시간 내 3시간)</p>
+        </div><!-- // -->
+
+        <div>
+          <h4>신청서</h4>
+          <p>주민등록표 열람 또는 등초본 교부신청서, 교부신청 위임장
+            <small>(주민등록법 시행규칙 : 별지서식 7, 7호의2, 9호)</small>
+          </p>
+        </div><!-- // -->
+
+        <div>
+          <h4>구비서류</h4>
+          <p>있음
+            <small>(하단참조)</small>
+          </p>
+        </div><!-- // -->
+
+        <div>
+          <h4>수수료</h4>
+          <p>1통(400원) / 이해관계인의 등초본교부는 500원 / <br>인터넷으로 발급받을 때는 무료임</p>
+        </div><!-- // -->
+      </div>
+
+
+    </section>
+
+  </main>
+
+</body>
+
+</html>
