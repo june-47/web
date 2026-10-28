@@ -47,7 +47,27 @@ nav ul.gnb {
 
 nav ul.gnb>li {
   width: 25%;
-  text-align: center;
+  line-height: 60px;
   border: 1px solid #000;
-  justify-content: left;
+  text-align: center;
+}
+
+nav ul.gnb>li:hover>a {
+  background: #000;
+  color: #fff;
+  display: block;
+}
+
+nav ul.gnb>li>ul.lnb {
+  display: none;
+}
+
+nav ul:hover.gnb>li>ul.lnb {
+  display: block;
+  background: #fff;
+}
+
+nav ul.gnb>li>ul.lnb>li:hover {
+  background: #000;
+  color: #fff;
 }
