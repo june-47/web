@@ -14,8 +14,16 @@ a {
   color: inherit;
 }
 
+.wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+
 header {
   height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .gallary {
@@ -32,12 +40,14 @@ footer {
 }
 
 nav ul.gnb {
+  width: 720px;
   height: 60px;
   display: flex;
 }
 
 nav ul.gnb>li {
+  width: 25%;
+  text-align: center;
   border: 1px solid #000;
   justify-content: left;
 }
-
