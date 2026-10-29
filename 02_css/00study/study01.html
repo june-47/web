@@ -5,48 +5,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>study01</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <link rel="stylesheet" href="./css/study01.css">
 
 </head>
 
 <body>
- <div class="wrap">
-  <header>
-    <nav>
-      <ul class="gnb">
-        <li><a class="logo" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" alt="Apple"></a></li>
-        <li><a href="#">스토어</a></li>
-        <li><a href="#">Mac</a></li>
-        <li><a href="#">iPad</a></li>
-        <li><a href="#">iPhone</a></li>
-        <li><a href="#">Wacth</a></li>
-        <li><a href="#">Vision</a></li>
-        <li><a href="#">Airpods</a></li>
-        <li><a href="#">홈</a></li>
-        <li><a href="#">엔터테인먼트</a></li>
-        <li><a href="#">엑세서리</a></li>
-        <li><a href="#">고객지원</a></li>
-        <li><a class="icon" href="#"><img src="" alt="search"></a></li>
-        <li><a class="icon" href="#"><img src="" alt="cart"></a></li>
-      </ul>
-    </nav>
-    <div class="banner">
-      <p>이제 최소 결제 금액 조건 충족 시 제휴 신용카드로 최대 18개월 무이자 할부 결제 가능.</p>
-      <a class="h_link" href="#">더 알아보기></a>
-    </div>
-  </header>
-  <main>
-    <div class="store">
-      <h1>스토어</h1>
-      <div>
-        <h2>좋아하는 Apple 제품을 구입하는 가장 좋은 방법.</h2>
-        <a class="h_link" href="#">스페셜리스트에게 문의</a>
-        <a class="h_link" href="#">Apple Store 찾기</a>
+  <div class="wrap">
+    <header>
+      <nav>
+        <ul class="gnb">
+          <li><a class="logo" href="#"><img
+                src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+                alt="Apple"></a></li>
+          <li><a href="#">스토어</a></li>
+          <li><a href="#">Mac</a></li>
+          <li><a href="#">iPad</a></li>
+          <li><a href="#">iPhone</a></li>
+          <li><a href="#">Wacth</a></li>
+          <li><a href="#">Vision</a></li>
+          <li><a href="#">Airpods</a></li>
+          <li><a href="#">홈</a></li>
+          <li><a href="#">엔터테인먼트</a></li>
+          <li><a href="#">엑세서리</a></li>
+          <li><a href="#">고객지원</a></li>
+          <li><button class="button" id="search"><span class="icon_material_symbols_search"
+                aria-hidden="true"></span></button></li>
+          <li><button class="button" id="cart"><span class="icon_famicons_bag_outline"
+                aria-hidden="true"></span></button></li>
+        </ul>
+      </nav>
+      <div class="banner">
+        <p>이제 최소 결제 금액 조건 충족 시 제휴 신용카드로 최대 18개월 무이자 할부 결제 가능.</p>
+        <a class="h_link" href="#">더 알아보기></a>
       </div>
-      <div class="slide">이미지 슬라이드</div>
-    </div>
-  </main>
-  <footer></footer>
+    </header>
+    <main>
+      <section class="home">
+        <div class="store">
+          <h1>스토어</h1>
+          <div class="box_1">
+            <h2>좋아하는 Apple 제품을<br>구입하는 가장 좋은 방법.</h2>
+            <a class="h_link" href="#">스페셜리스트에게 문의</a>
+            <a class="h_link" href="#">Apple Store 찾기</a>
+          </div>
+        </div><!-- //.store -->
+          <div class="slide">
+            <!-- 이미지 슬라이드 -->
+            <ul>
+              <li><a href="#"><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-mac-nav-202610?wid=400&hei=260&fmt=webp-alpha&qlt=90&.v=M1Q3OGxnb1lBaHhqNjZ2OVRXZmx4VXlOaitvdEVRSWRBNTlPWUlJbm9KbisrUlZaSVRoWVYzU0Qra0FoTmUwNi9QNXlFS1hSa1R2UkcrWjFiN21qeGlLYTFScnlUSmU1U3lualVXUTNBVjZpanVySjA1UGZoQW1GL0dBYnVoY0k&traceId=1" alt="Mac">Mac</a></li>
+              <li><a href="#"><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-iphone-nav-202609?wid=400&hei=260&fmt=webp-alpha&qlt=90&.v=dW5XbHI1eDVpd01qWUU4bFRtWGZXMWdGVG1nbG0xL1p6dm9DRUFPZ0dweDVoZlhhY1p4QWdsTjFNaGRHM3FYWWUzNFVlZmYxaVpiTW5tRlBYR0RFVklTTzF3TXlWM0VQVDViZjNveGdyVU9lTTB1dFozcWlUMzVoT1cvanh0Tmw&traceId=1" alt="iPhone">iPhone</a></li>
+              <li><a href="#"><img src=https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-ipad-nav-202405?wid=400&hei=260&fmt=webp-alpha&qlt=90&.v=dW5XbHI1eDVpd01qWUU4bFRtWGZXNGFLQTJVNnlNQmQrVmRBYnZYei9jckUzelNmMnRxajE0NHhmMWtLazl6eGtqQUNSY05Zb293eGJHTE9hUWczcnVqTnpaVXRhU3dOZ1ZOcTU5bHVTTkNFYWxxelhUNTl3NnJFTGlRNFh3azE&traceId=1" alt="iPad">iPad</a></li>
+              <li><a href="#"><img src=https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-watch-nav-202609_GEO_KR?wid=400&hei=260&fmt=webp-alpha&qlt=90&.v=S0tSVzBtSkRkSFFhMm1zS1NmeWtkeE9WMkZMMjB1Njd1c1lXRUh5b1BXRHpDdEdXaWt6NjBMRStVQlhJWGNVNE1DTS9QV2xKYXo2bE9ETG5WUkpWcFBvZUk3ZVZqK0FuWVJRM3FKNkVncGVLbXFyM0JrZi9DYkZkQlViYmJOU3Q&traceId=1" alt="Apple Watch">Apple Watch</a></li>
+              <li><a href="#"><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-vision-pro-nav-202401?wid=400&hei=260&fmt=webp-alpha&qlt=90&.v=VzVpanYvTldHb05iVXFhc0xveWRLM25jd0w4dXFwc1hFbWZkNm9IcUR2bytSMWt1ZUNyTGx4SjRKL1pSL0ZDeDJzTWppUFJjbWt5c0VTSnZpSGhSZVBqOWVIcWlLZU4wTy91U1NTVlNIU25RREYzN0M5bCttdXFSOEZURjh1ODY&traceId=1" alt="Apple Vision Pro">Apple Vision Pro</a></li>
+              <li><a href="#"><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-appletv-nav-202610?wid=240&hei=156&fmt=webp-alpha&qlt=90&.v=T0wvM1N3YUcxQ09qK0VNRkl1RU1BUnVrbms0N1lwUmlGeUdYZ0JzVEVzUzZKYXNvN1AyRFI4L1hPbTVrazl4UnFIMjJSU3VUZGRWY2Q0ZzZrZlVTSEFEMVo1V1hOSVEwc0U3ZkI3ZWRQN0dDZXl3WW1uZmlxc0RCVEt0UGQrR0k&traceId=1" alt="Home">홈</a></li>
+              <li><a href="#"><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-airpods-nav-202509?wid=400&hei=260&fmt=webp-alpha&qlt=90&.v=Q0Z1bWFqMUpRRnp3T0Y0VWJpdk1yMDhFUStvWHB3SDlDa3VrdUZORWRqeld1aTN5QlRYNG5PRjJxc2d1RklXbXFIMjJSU3VUZGRWY2Q0ZzZrZlVTSEVaKytVOXBFNXhUYkFYeU1LbHRXRDJCblJUU25lOTBVc1pJNFhQcHA5TlQ&traceId=1" alt="AirPods">AirPods</a></li>
+              <li><a href="#"><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-airtags-nav-202601?wid=400&hei=260&fmt=webp-alpha&qlt=90&.v=Q0Z1bWFqMUpRRnp3T0Y0VWJpdk1yL1FqZ2pobDV2bDUyWU1XVmNnMmx3VFd1aTN5QlRYNG5PRjJxc2d1RklXbXFIMjJSU3VUZGRWY2Q0ZzZrZlVTSEtwNS9iZlZFOXI4OVJlckErUVNlekMvZUZiN3NsZUNFZ1FxWm45dm13UTg&traceId=1" alt="AirTag">AirTag</a></li>
+              <li><a href="#"><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-accessories-nav-202609?wid=240&hei=156&fmt=webp-alpha&qlt=90&.v=QnhsNk96S0o4R1dkN2FveStNM1hwNzZGMHVrNGw2NTM5Vmk2bHZzMXQ3andmemN3dmNHVFJjenRQYk1lUFpSRFUvQk80eDZ3VFAzNXRKWVBtSG1tRktvSHphdyszeHBObUNiNWtRSFBzM1k4aWJmZ0ZqclZySWJJMFljQnNqR1M&traceId=1" alt="Accessary">액세서리</a></li>
+            </ul>
+          </div><!-- //.slide -->
+
+      </section><!-- //.home -->
+
+    </main>
+    <footer></footer>
 
 
 
@@ -56,7 +78,7 @@
 
 
 
- </div>
+  </div>
 </body>
 
 </html>
