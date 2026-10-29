@@ -3,12 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>translate</title>
   <style>
-    
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.8);
+    }
+
+    #closeBtn {
+      background: #fff;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      bottom: 3%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .modal_inner {
+      background: #fff;
+      width: 70%;
+      height: 500px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    /* header {
+
+    } */
   </style>
 </head>
 <body>
-  
+  <div class="modal">
+    <button type="button" id="closeBtn">x</button>
+    <div class="modal_inner">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores officiis nihil ab, cum iure ea voluptates optio pariatur quasi? Harum officia tempora similique necessitatibus sapiente rerum! Autem cumque atque eligendi provident cupiditate perferendis nobis doloremque quibusdam, quo, perspiciatis sed quas dolor tempora ad qui impedit tempore. Quae, ducimus. Cumque porro suscipit asperiores, qui, laudantium quam consequuntur vitae nesciunt in odit dolor recusandae exercitationem deserunt ea voluptas dolorum! Delectus impedit ratione ex fugiat, architecto tempore consectetur quaerat, ipsum, vel reprehenderit nostrum optio a facere consequuntur fuga? Quos tenetur optio fuga facere beatae laboriosam dicta. Quasi eum accusantium maiores a eaque ea voluptas distinctio delectus magni porro ducimus veritatis, sint architecto, reprehenderit repellat ipsam ut alias illum possimus suscipit? Suscipit tempora tenetur nisi voluptatibus fugiat fugit praesentium. Id sed nobis alias tenetur beatae at accusamus. Asperiores, corporis minus iusto neque animi sit ea voluptate necessitatibus iste, dolore quos earum. Ex provident corporis alias ab assumenda velit dicta dolor maxime laudantium voluptatibus. Est, vitae repudiandae? Quas ea odio suscipit ipsum ex quis corrupti consectetur, nulla illo sit nobis minima asperiores, labore tenetur rem iusto aut? Nisi dignissimos ex hic maiores soluta totam error dolores, amet voluptatibus et modi quia! Quidem quo rerum nostrum consequatur architecto quibusdam aut, at distinctio exercitationem expedita reiciendis ratione veritatis blanditiis. Nisi aut veniam veritatis velit esse voluptate officia incidunt modi dignissimos nemo quod magnam doloremque maiores mollitia corporis dolorum ex delectus rem deserunt, non laboriosam atque? Odio, sunt corrupti repellat voluptatem quaerat vel, corporis, eligendi perspiciatis exercitationem nesciunt laborum amet itaque vitae quae harum temporibus magnam quas iusto ex. Omnis maiores, dolores, natus sapiente laudantium atque soluta quos incidunt provident nostrum voluptatem sint asperiores velit a dignissimos aperiam, molestias ex! Ducimus aut molestiae impedit ea, inventore dolorem ullam doloremque quos, amet blanditiis aliquid mollitia eos dignissimos, culpa alias.
+    </div>
+  </div>
+
+  <header><a href="#">logo</a></header>
 </body>
 </html>

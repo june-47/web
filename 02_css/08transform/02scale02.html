@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>scale</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      list-style: none;
+      width: 640px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    ul li {
+      width: 200px;
+      height: 150px;
+      overflow: hidden;
+    }
+
+    ul li a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    ul li a img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.6s;
+    }
+
+    ul li:hover a img {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li><a href="#"><img src="https://img1.newsis.com/2026/10/02/NISI20261002_0002254581_web.jpg" alt="김채원"></a>
+    </li>
+
+    <li><a href="#"><img src="https://cdn.topstarnews.net/news/photo/202610/16252681_2061258_592.jpg" alt="김채원"></a>
+    </li>
+
+    <li><a href="#"><img src="https://image.msscdn.net/thumbnails/ocmp/contents/content/file_1791791224777_f204bc6fd546.jpg?w=1080" alt="김채원"></a>
+    </li>
+  </ul>
+</body>
+
+</html>
