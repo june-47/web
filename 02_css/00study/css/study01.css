@@ -17,7 +17,7 @@ a {
 }
 
 .wrap {
-  width: 1920px;
+  width: 1024px;
   margin: 0 auto;
 }
 
@@ -30,18 +30,32 @@ header {
 nav {
   width: 100%;
   display: flex;
-  height: 52px;
+  height: 44px;
   background: yellow;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
+  font-size: 12px;
+}
+
+nav a.logo {
+  width: 30px;
+  height: 100%;
+  padding: 12px;
+}
+
+nav a.logo img {
+  width: 16px;
+  height: fit-content;
+  object-fit: cover;
 }
 
 nav ul.gnb {
+  /* width: ; */
   display: flex;
 }
 
 nav ul.gnb>li {
-  width: 1;
+  /* width: ; */
   padding: 4px;
 }
 
