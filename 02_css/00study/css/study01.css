@@ -2,13 +2,18 @@
 @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined);
 
 * {
-  padding: 0;
   margin: 0;
-  background: #ccc;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-li {
+ul {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .wrap {
@@ -17,10 +22,9 @@ li {
 }
 
 header {
-  width: 100%;
   height: 200px;
-  background: lightpink;
   display: flex;
+  background: lightpink;
   
 }
 
