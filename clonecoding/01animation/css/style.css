@@ -93,7 +93,6 @@ h1 {
 section {
   width: 1000px;
   height: 400px;
-  background: #ccc;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -104,8 +103,133 @@ section img {
   position: absolute;
 }
 
-.sky .sun {}
+.sky .sun {
+  top: -150px;
+  left: 50%;
+  margin-left: -110px;
+  transform-origin: center 500px;
+  animation: sunAni 20s linear infinite;
+}
 
-.sky .cloud1 {}
+@keyframes sunAni {
+  0% {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
 
-.sky .cloud2 {}
+  25% {
+    transform: rotate(-30deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: rotate(30deg);
+    opacity: 1;
+  }
+
+  75% {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+}
+
+.sky .cloud1 {
+  left: 10%;
+  top: -30px;
+  animation: flow linear infinite 10s;
+}
+
+.sky .cloud2 {
+  left: 0;
+  top: 20px;
+  animation: flow linear infinite 20s;
+}
+
+@keyframes flow {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    left: 90%;
+  }
+}
+
+.town .orbit {
+  bottom: 104px;
+  left: 50%;
+  margin-left: -165px;
+  opacity: .7;
+  animation: rotate linear 20s infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+    opacity: .7;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.town .town_n {
+  bottom: 0;
+  left: 40px;
+}
+
+.town .town_d {
+  bottom: 0;
+  left: 40px;
+  animation: dayAni linear infinite 20s;
+}
+
+@keyframes dayAni {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.people .man {
+  left: 0;
+  bottom: 0;
+  animation: flow linear infinite 7s;
+}
+
+.people .family {
+  left: 0;
+  bottom: 0;
+  animation: flow linear infinite 20s;
+}
