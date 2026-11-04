@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>javascript 시작하기</title>
+  </head>
+  <body>
+    <button type="button" class="alert">경고창</button>
+    <button type="button" class="prompt">프롬프트</button>
+    <button type="button" class="confirm">확인/취소</button>
+    <button type="button" class="console">콘솔로그</button>
+    <button type="button" class="document">바디전체 바꾸기</button>
+    <script>
+      document.querySelector(".alert").onclick = function () {
+        alert("이것은 alert()로 띄운 알림 메시지 입니다.");
+      };
+
+      document.querySelector(".prompt").onclick = () => {
+        // prompt('이름을 입력하세요', '홍길동');
+        let loveName = prompt("이름을 입력하세요", "홍길동");
+        console.log(loveName);
+      };
+
+      document.querySelector(".confirm").onclick = () => {
+        // confirm('자바스크립트가 재미있습니까?');
+        let a = confirm("자바스크립트가 재미있습니까?");
+        console.log(a);
+        if (a) {
+          console.log("재미있어요");
+        } else {
+          console.log("재미없어요");
+        }
+      };
+
+      document.querySelector(".document").onclick = () => {
+        document.write("<h2>빨리 쉬고 싶다.</h2>");
+      };
+    </script>
+  </body>
+</html>
