@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>callender</title>
+    <style>
+      div {
+        width: 400px;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      div>div {
+        display: flex;
+        justify-content: start;
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+        
+      }
+
+      p {
+        width: 13.9%;
+        /* border: 1px solid #ccc; */
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      document.write("<div>");
+      document.write("<select>");
+      for (let month = 1; month <= 12; month++) {
+        document.write(`<option value="${month}">${month}월</option>`);
+      }
+      document.write("</select>");
+      console.log(document.querySelector("option").value);
+
+      //option의 value 값을 어떻게 가져오지?
+
+      document.write("<div>");
+
+      for (let date = 1; date <= 31; date++) {
+        document.write(`<p>${date}</p>`);
+      }
+      document.write("</div>");
+      document.write("</div>");
+    </script>
+  </body>
+</html>
