@@ -1,19 +1,17 @@
 @charset "utf-8";
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
-@import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined);
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
 :root {
   letter-spacing: -2%;
-  --bg_color: #F5F5F7;
-
+  --bg_color: #f5f5f7;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #F5F5F7;
-
+  background: #f5f5f7;
 }
 
 .icon_material_symbols_search {
@@ -21,8 +19,10 @@
   width: 24px;
   height: 24px;
   background: currentColor;
-  mask: url('https://api.iconify.design/material-symbols/search.svg') no-repeat center / contain;
-  -webkit-mask: url('https://api.iconify.design/material-symbols/search.svg') no-repeat center / contain;
+  mask: url("https://api.iconify.design/material-symbols/search.svg") no-repeat
+    center / contain;
+  -webkit-mask: url("https://api.iconify.design/material-symbols/search.svg")
+    no-repeat center / contain;
 }
 
 .icon_famicons_bag_outline {
@@ -30,8 +30,10 @@
   width: 24px;
   height: 24px;
   background: currentColor;
-  mask: url('https://api.iconify.design/famicons/bag-outline.svg') no-repeat center / contain;
-  -webkit-mask: url('https://api.iconify.design/famicons/bag-outline.svg') no-repeat center / contain;
+  mask: url("https://api.iconify.design/famicons/bag-outline.svg") no-repeat
+    center / contain;
+  -webkit-mask: url("https://api.iconify.design/famicons/bag-outline.svg")
+    no-repeat center / contain;
 }
 
 ul {
@@ -71,7 +73,6 @@ h1 {
 header {
   height: 200px;
   /* background: lightpink; */
-
 }
 
 nav {
@@ -111,8 +112,8 @@ nav ul.gnb {
   gap: 4px;
 }
 
-.banner>p,
-.banner>a.h_link {
+.banner > p,
+.banner > a.h_link {
   background: #fff;
 }
 
@@ -134,7 +135,7 @@ nav ul.gnb {
 
 .slide {
   width: 100%;
-  overflow: ;
+  overflow: hidden;
 }
 
 .slide ul {
@@ -143,18 +144,18 @@ nav ul.gnb {
   gap: 20px;
 }
 
-.slide>ul>li {
+.slide > ul > li {
   width: fit-content;
   height: 80px;
   text-align: center;
   font-weight: 600;
 }
 
-.slide>ul>li>a:hover {
+.slide > ul > li > a:hover {
   text-decoration: underline;
 }
 
-.slide>ul>li>a>img {
+.slide > ul > li > a > img {
   width: fit-content;
   height: 100%;
   object-fit: cover;
