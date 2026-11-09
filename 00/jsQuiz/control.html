@@ -94,9 +94,10 @@
       // n = 1 에서 시작해 n 을 2배씩 키울 때, 처음으로 1000을 넘는 n 의 값을 변수 over 에 담아라.
       let n = 1;
       // 여기에 작성
-      
-    
-      let over;
+      while (n <= 1000) {
+        n *= 2;
+      }
+      let over = n;
 
       check(6, over, 1024);
 
@@ -106,13 +107,26 @@
       let total = 0;
       let stopAt;
       // 여기에 작성
-
+      for (let i = 1; ; i++) {
+        total += i;
+        if (total > 50) {
+          stopAt = i;
+          break;
+        }
+      }
       check(7, stopAt, 10);
 
       // [문제 8] continue
       // 1부터 10까지 중 홀수만 더해서 변수 oddSum 에 담아라. (짝수는 continue 로 건너뛴다)
       let oddSum = 0;
       // 여기에 작성
+      for (let i = 1; i <= 10; i++) {
+        if (i % 2 == 0) {
+          continue;
+        } else {
+          oddSum += i;
+        }
+      }
 
       check(8, oddSum, 25);
 
@@ -121,6 +135,11 @@
       // (2x1=2, 2x2=4, ... 2x9=18, 3x1=3, ... 3x9=27 → 총 18개)
       let gugu = [];
       // 여기에 작성
+      for (let i = 1; i < 10; i++) {
+        for (let d = 2; d <= 3; d++) {
+          gugu.push(`${d}x${i}=${d * i}`);
+        }
+      }
 
       check(9, gugu.length, 18);
       check("9-2", gugu[0], "2x1=2");
@@ -132,7 +151,7 @@
       let str = "Hello JavaScript";
       let vowels = 0;
       // 여기에 작성
-
+      
       check(10, vowels, 5);
     </script>
   </body>

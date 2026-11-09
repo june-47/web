@@ -1,155 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>JS Quiz - Array</title>
-  <link rel="stylesheet" href="quiz.css">
-</head>
-<body>
-  <h1>Array 퀴즈</h1>
-  <p>각 주석을 읽고 코드를 작성한 뒤 저장 → 브라우저 새로고침.</p>
-  <div id="result"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz - Array</title>
+    <link rel="stylesheet" href="quiz.css" />
+  </head>
+  <body>
+    <h1>Array 퀴즈</h1>
+    <p>각 주석을 읽고 코드를 작성한 뒤 저장 → 브라우저 새로고침.</p>
+    <div id="result"></div>
 
-  <script src="quiz.js"></script>
-  <script>
-    // [문제 1] 배열 만들기와 접근
-    // 과일 'apple', 'banana', 'cherry' 가 담긴 배열 fruits 를 만들고,
-    // 두 번째 요소를 변수 second 에 담아라.
-    // 여기에 작성
-    let fruits, second;
-    fruits = ['apple', 'banana','cherry']
-    second = fruits[1]
+    <script src="quiz.js"></script>
+    <script>
+      // [문제 1] 배열 만들기와 접근
+      // 과일 'apple', 'banana', 'cherry' 가 담긴 배열 fruits 를 만들고,
+      // 두 번째 요소를 변수 second 에 담아라.
+      // 여기에 작성
+      let fruits, second;
+      fruits = ["apple", "banana", "cherry"];
+      second = fruits[1];
 
-    check(1, second, 'banana');
+      check(1, second, "banana");
 
+      // [문제 2] push / pop
+      // nums = [1, 2, 3] 의 끝에 4 를 추가(push)하고, 그 뒤 마지막 요소를 꺼내(pop) 변수 popped 에 담아라.
+      // 최종 nums 는 [1, 2, 3] 이어야 한다.
+      let nums = [1, 2, 3];
+      let popped;
+      // 여기에 작성
+      nums.push(4);
+      popped = nums.pop();
 
-    // [문제 2] push / pop
-    // nums = [1, 2, 3] 의 끝에 4 를 추가(push)하고, 그 뒤 마지막 요소를 꺼내(pop) 변수 popped 에 담아라.
-    // 최종 nums 는 [1, 2, 3] 이어야 한다.
-    let nums = [1, 2, 3];
-    let popped;
-    // 여기에 작성
-    nums.push(4);
-    popped = nums.pop();
+      check(2, [nums, popped], [[1, 2, 3], 4]);
 
+      // [문제 3] unshift / shift
+      // list = ['b', 'c'] 의 맨 앞에 'a' 를 추가(unshift)하라. 그 후 맨 앞 요소를 shift 로 제거하고 변수 first 에 담아라.
+      // 최종 list 는 ['b', 'c'] 이어야 한다.
+      let list = ["b", "c"];
+      let first;
+      // 여기에 작성
+      list.unshift("a");
+      first = list.shift();
 
-    check(2, [nums, popped], [[1, 2, 3], 4]);
+      check(3, [list, first], [["b", "c"], "a"]);
 
+      // [문제 4] length 와 순회
+      // scores = [70, 85, 90, 65] 의 평균을 for 문으로 구해 변수 avg 에 담아라.
+      let scores = [70, 85, 90, 65];
+      let avg;
+      // 여기에 작성
+      let sum = 0;
+      for (let i in scores) {
+        sum += scores[i];
+      }
+      avg = sum / Number(scores.length);
 
-    // [문제 3] unshift / shift
-    // list = ['b', 'c'] 의 맨 앞에 'a' 를 추가(unshift)하라. 그 후 맨 앞 요소를 shift 로 제거하고 변수 first 에 담아라.
-    // 최종 list 는 ['b', 'c'] 이어야 한다.
-    let list = ['b', 'c'];
-    let first;
-    // 여기에 작성
-    list.unshift('a');
-    first = list.shift();
+      check(4, avg, 77.5);
 
-    check(3, [list, first], [['b', 'c'], 'a']);
+      // [문제 5] 최댓값 찾기
+      // values = [3, 17, 8, 42, 11] 에서 가장 큰 값을 (Math.max 쓰지 말고) 반복문으로 찾아 변수 biggest 에 담아라.
+      let values = [3, 17, 8, 42, 11];
+      let biggest;
+      // 여기에 작성
 
+      check(5, biggest, 42);
 
-    // [문제 4] length 와 순회
-    // scores = [70, 85, 90, 65] 의 평균을 for 문으로 구해 변수 avg 에 담아라.
-    let scores = [70, 85, 90, 65];
-    let avg;
-    // 여기에 작성
-    
-  
-    check(4, avg, 77.5);
+      // [문제 6] map
+      // prices = [1000, 2000, 3000] 의 각 값에 10% 할인을 적용한 새 배열 discounted 를 map 으로 만들어라.
+      let prices = [1000, 2000, 3000];
+      let discounted;
+      // 여기에 작성
+      discounted = prices.map((v) => v * 0.9);
 
+      check(6, discounted, [900, 1800, 2700]);
 
-    // [문제 5] 최댓값 찾기
-    // values = [3, 17, 8, 42, 11] 에서 가장 큰 값을 (Math.max 쓰지 말고) 반복문으로 찾아 변수 biggest 에 담아라.
-    let values = [3, 17, 8, 42, 11];
-    let biggest;
-    // 여기에 작성
+      // [문제 7] filter
+      // ages = [12, 25, 17, 30, 8, 19] 에서 19세 이상(성인)만 골라 배열 adults 에 담아라. (filter 사용)
+      let ages = [12, 25, 17, 30, 8, 19];
+      let adults;
+      // 여기에 작성
+      function isAdult(ages) {
+        return ages >= 19;
+      }
+      adults = ages.filter(isAdult);
 
+      check(7, adults, [25, 30, 19]);
 
-    check(5, biggest, 42);
+      // [문제 8] reduce
+      // cart = [{name:'pen', price:500}, {name:'book', price:12000}, {name:'bag', price:30000}]
+      // 모든 상품 가격의 합을 reduce 로 구해 변수 totalPrice 에 담아라.
+      let cart = [
+        { name: "pen", price: 500 },
+        { name: "book", price: 12000 },
+        { name: "bag", price: 30000 },
+      ];
+      let totalPrice;
+      // 여기에 작성
 
+      check(8, totalPrice, 42500);
 
-    // [문제 6] map
-    // prices = [1000, 2000, 3000] 의 각 값에 10% 할인을 적용한 새 배열 discounted 를 map 으로 만들어라.
-    let prices = [1000, 2000, 3000];
-    let discounted;
-    // 여기에 작성
+      // [문제 9] find / includes / indexOf
+      // names = ['kim', 'lee', 'park', 'choi'] 에서
+      //  (a) 'park' 의 인덱스를 idx 에
+      //  (b) 'lee' 가 포함되어 있는지(boolean)를 has 에
+      //  (c) 길이가 4인 첫 번째 이름을 found 에 담아라.
+      let names = ["kim", "lee", "park", "choi"];
+      let idx, has, found;
+      // 여기에 작성
 
+      check(9, [idx, has, found], [2, true, "park"]);
 
-    check(6, discounted, [900, 1800, 2700]);
+      // [문제 10] slice / splice
+      // arr = [10, 20, 30, 40, 50]
+      //  (a) slice 로 원본을 바꾸지 않고 [20, 30, 40] 을 sliced 에 담아라.
+      //  (b) splice 로 원본에서 인덱스 1부터 2개를 제거하라. 제거된 요소는 removed 에 담아라.
+      // 최종 arr 은 [10, 40, 50], removed 는 [20, 30] 이어야 한다.
+      let arr = [10, 20, 30, 40, 50];
+      let sliced, removed;
+      // 여기에 작성
+      sliced = arr.slice(1, 4);
+      removed = arr.splice(1, 2);
 
+      check(
+        10,
+        [sliced, removed, arr],
+        [
+          [20, 30, 40],
+          [20, 30],
+          [10, 40, 50],
+        ],
+      );
 
-    // [문제 7] filter
-    // ages = [12, 25, 17, 30, 8, 19] 에서 19세 이상(성인)만 골라 배열 adults 에 담아라. (filter 사용)
-    let ages = [12, 25, 17, 30, 8, 19];
-    let adults;
-    // 여기에 작성
+      // [문제 11] sort
+      // data = [10, 9, 100, 1] 을 숫자 오름차순으로 정렬해 sortedData 에 담아라.
+      // (기본 sort 는 문자열 정렬이라 비교 함수가 필요하다)
+      let data = [10, 9, 100, 1];
+      let sortedData;
+      // 여기에 작성
+      sortedData = data.sort((a, b) => a - b);
 
+      check(11, sortedData, [1, 9, 10, 100]);
 
-    check(7, adults, [25, 30, 19]);
+      // [문제 12] 2차원 배열
+      // grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] 의 모든 요소의 합을 중첩 반복문으로 구해 gridSum 에 담아라.
+      // 또한 대각선 요소(1, 5, 9)만 모은 배열을 diagonal 에 담아라.
+      let grid = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+      let gridSum = 0;
+      let diagonal = [];
+      // 여기에 작성
 
-
-    // [문제 8] reduce
-    // cart = [{name:'pen', price:500}, {name:'book', price:12000}, {name:'bag', price:30000}]
-    // 모든 상품 가격의 합을 reduce 로 구해 변수 totalPrice 에 담아라.
-    let cart = [
-      { name: 'pen', price: 500 },
-      { name: 'book', price: 12000 },
-      { name: 'bag', price: 30000 }
-    ];
-    let totalPrice;
-    // 여기에 작성
-
-
-    check(8, totalPrice, 42500);
-
-
-    // [문제 9] find / includes / indexOf
-    // names = ['kim', 'lee', 'park', 'choi'] 에서
-    //  (a) 'park' 의 인덱스를 idx 에
-    //  (b) 'lee' 가 포함되어 있는지(boolean)를 has 에
-    //  (c) 길이가 4인 첫 번째 이름을 found 에 담아라.
-    let names = ['kim', 'lee', 'park', 'choi'];
-    let idx, has, found;
-    // 여기에 작성
-
-
-    check(9, [idx, has, found], [2, true, 'park']);
-
-
-    // [문제 10] slice / splice
-    // arr = [10, 20, 30, 40, 50]
-    //  (a) slice 로 원본을 바꾸지 않고 [20, 30, 40] 을 sliced 에 담아라.
-    //  (b) splice 로 원본에서 인덱스 1부터 2개를 제거하라. 제거된 요소는 removed 에 담아라.
-    // 최종 arr 은 [10, 40, 50], removed 는 [20, 30] 이어야 한다.
-    let arr = [10, 20, 30, 40, 50];
-    let sliced, removed;
-    // 여기에 작성
-
-
-    check(10, [sliced, removed, arr], [[20, 30, 40], [20, 30], [10, 40, 50]]);
-
-
-    // [문제 11] sort
-    // data = [10, 9, 100, 1] 을 숫자 오름차순으로 정렬해 sortedData 에 담아라.
-    // (기본 sort 는 문자열 정렬이라 비교 함수가 필요하다)
-    let data = [10, 9, 100, 1];
-    let sortedData;
-    // 여기에 작성
-
-
-    check(11, sortedData, [1, 9, 10, 100]);
-
-
-    // [문제 12] 2차원 배열
-    // grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] 의 모든 요소의 합을 중첩 반복문으로 구해 gridSum 에 담아라.
-    // 또한 대각선 요소(1, 5, 9)만 모은 배열을 diagonal 에 담아라.
-    let grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-    let gridSum = 0;
-    let diagonal = [];
-    // 여기에 작성
-
-
-    check(12, [gridSum, diagonal], [45, [1, 5, 9]]);
-  </script>
-</body>
+      check(12, [gridSum, diagonal], [45, [1, 5, 9]]);
+    </script>
+  </body>
 </html>
