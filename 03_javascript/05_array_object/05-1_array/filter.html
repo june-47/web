@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>filter 메소드</title>
+  </head>
+  <body>
+    <script>
+      // 배열에서 조건이 참인 데이터만 걸러내 새로운 배열 생성
+      // 나이 데이터
+      let ages = [13, 25, 19, 32, 15, 40, 18, 22];
+
+      //1)성인만 필터(18세 이상)
+      function isAdult(age) {
+        return age >= 18;
+      }
+      let adults = ages.filter(isAdult);
+
+      document.write(`<h3>나이 배열 필터링</h3>`);
+      document.write(`원본 배열 : ${ages.join(", ")}<br>`);
+      document.write(`성인만 필터 배열 : ${adults.join(", ")}<br>`);
+      // under30 = 30세 미만만 필터된 배열 (화살표함수);
+
+      let under30 = ages.filter((v) => {
+        return v < 30;
+      });
+      document.write(`30세 미만 필터 배열 : ${under30.join("-")}<br>`);
+
+      let over24 = ages.filter((a) => {
+        return a >= 24;
+      });
+      document.write(`24세 이상 필터 배열 : ${over24.join(", ")} `);
+    </script>
+  </body>
+</html>
