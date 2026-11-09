@@ -17,7 +17,8 @@
     // 두 번째 요소를 변수 second 에 담아라.
     // 여기에 작성
     let fruits, second;
-
+    fruits = ['apple', 'banana','cherry']
+    second = fruits[1]
 
     check(1, second, 'banana');
 
@@ -28,6 +29,8 @@
     let nums = [1, 2, 3];
     let popped;
     // 여기에 작성
+    nums.push(4);
+    popped = nums.pop();
 
 
     check(2, [nums, popped], [[1, 2, 3], 4]);
@@ -39,7 +42,8 @@
     let list = ['b', 'c'];
     let first;
     // 여기에 작성
-
+    list.unshift('a');
+    first = list.shift();
 
     check(3, [list, first], [['b', 'c'], 'a']);
 
@@ -49,8 +53,8 @@
     let scores = [70, 85, 90, 65];
     let avg;
     // 여기에 작성
-
-
+    
+  
     check(4, avg, 77.5);
 
 

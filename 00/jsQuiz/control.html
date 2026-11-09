@@ -1,118 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>JS Quiz - Control Statement</title>
-  <link rel="stylesheet" href="quiz.css">
-</head>
-<body>
-  <h1>Control Statement 퀴즈</h1>
-  <p>각 주석을 읽고 아래에 코드를 작성한 뒤 저장 → 브라우저 새로고침. (check 함수가 결과를 보여줍니다)</p>
-  <div id="result"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz - Control Statement</title>
+    <link rel="stylesheet" href="quiz.css" />
+  </head>
+  <body>
+    <h1>Control Statement 퀴즈</h1>
+    <p>
+      각 주석을 읽고 아래에 코드를 작성한 뒤 저장 → 브라우저 새로고침. (check
+      함수가 결과를 보여줍니다)
+    </p>
+    <div id="result"></div>
 
-  <script src="quiz.js"></script>
-  <script>
-    // [문제 1] if / else
-    // 변수 score = 85 가 있다. 90 이상이면 'A', 80 이상이면 'B', 70 이상이면 'C', 그 외엔 'F' 를
-    // 변수 grade 에 담아라.
-    let score = 85;
-    let grade;
-    // 여기에 작성
+    <script src="quiz.js"></script>
+    <script>
+      // [문제 1] if / else
+      // 변수 score = 85 가 있다. 90 이상이면 'A', 80 이상이면 'B', 70 이상이면 'C', 그 외엔 'F' 를
+      // 변수 grade 에 담아라.
+      let score = 85;
+      let grade;
+      // 여기에 작성
+      if (score >= 90) {
+        grade = "A";
+      } else if (score >= 80) {
+        grade = "B";
+      } else if (score >= 70) {
+        grade = "C";
+      } else {
+        grade = "F";
+      }
 
+      check(1, grade, "B");
 
-    check(1, grade, 'B');
+      // [문제 2] 짝수/홀수 판별 (삼항 연산자)
+      // num = 7 일 때, 짝수면 '짝수', 홀수면 '홀수' 를 삼항 연산자로 변수 evenOdd 에 담아라.
+      let num = 7;
+      // 여기에 작성
+      let evenOdd;
+      evenOdd = num % 2 == 0 ? "짝수" : "홀수";
 
+      check(2, evenOdd, "홀수");
 
-    // [문제 2] 짝수/홀수 판별 (삼항 연산자)
-    // num = 7 일 때, 짝수면 '짝수', 홀수면 '홀수' 를 삼항 연산자로 변수 evenOdd 에 담아라.
-    let num = 7;
-    // 여기에 작성
-    let evenOdd;
+      // [문제 3] switch
+      // day = 3 (1:월, 2:화, 3:수, 4:목, 5:금, 그 외: '주말') 일 때
+      // switch 문으로 요일 문자열을 변수 dayName 에 담아라.
+      let day = 3;
+      let dayName;
+      // 여기에 작성
+      switch (day) {
+        case 1:
+          dayName = "월";
+          break;
+        case 2:
+          dayName = "화";
+          break;
+        case 3:
+          dayName = "수";
+          break;
+        case 4:
+          dayName = "목";
+          break;
+        case 5:
+          dayName = "금";
+          break;
+        default:
+          dayName = "주말";
+      }
+      check(3, dayName, "수");
 
+      // [문제 4] for 문 - 합계
+      // 1부터 100까지의 합을 for 문으로 구해 변수 sum 에 담아라.
+      let sum = 0;
+      // 여기에 작성
+      for (let i = 1; i <= 100; i++) {
+        sum += i;
+      }
+      check(4, sum, 5050);
 
-    check(2, evenOdd, '홀수');
+      // [문제 5] for + if - 3의 배수
+      // 1부터 30까지 중 3의 배수의 개수를 세어 변수 count 에 담아라.
+      let count = 0;
+      // 여기에 작성
+      for (let i = 1; i <= 30; i++) {
+        if (i % 3 == 0) {
+          count++;
+        }
+      }
 
+      check(5, count, 10);
 
-    // [문제 3] switch
-    // day = 3 (1:월, 2:화, 3:수, 4:목, 5:금, 그 외: '주말') 일 때
-    // switch 문으로 요일 문자열을 변수 dayName 에 담아라.
-    let day = 3;
-    let dayName;
-    // 여기에 작성
+      // [문제 6] while 문
+      // n = 1 에서 시작해 n 을 2배씩 키울 때, 처음으로 1000을 넘는 n 의 값을 변수 over 에 담아라.
+      let n = 1;
+      // 여기에 작성
+      
+    
+      let over;
 
+      check(6, over, 1024);
 
-    check(3, dayName, '수');
+      // [문제 7] break
+      // 1부터 시작해서 숫자를 하나씩 더하다가 누적합이 50을 넘는 순간 반복을 멈춰라(break).
+      // 그 때의 숫자(i)를 변수 stopAt 에 담아라.
+      let total = 0;
+      let stopAt;
+      // 여기에 작성
 
+      check(7, stopAt, 10);
 
-    // [문제 4] for 문 - 합계
-    // 1부터 100까지의 합을 for 문으로 구해 변수 sum 에 담아라.
-    let sum = 0;
-    // 여기에 작성
+      // [문제 8] continue
+      // 1부터 10까지 중 홀수만 더해서 변수 oddSum 에 담아라. (짝수는 continue 로 건너뛴다)
+      let oddSum = 0;
+      // 여기에 작성
 
+      check(8, oddSum, 25);
 
-    check(4, sum, 5050);
+      // [문제 9] 중첩 반복문 - 구구단
+      // 중첩 for 문으로 2단~3단의 결과를 '2x1=2' 형태의 문자열로 배열 gugu 에 순서대로 담아라.
+      // (2x1=2, 2x2=4, ... 2x9=18, 3x1=3, ... 3x9=27 → 총 18개)
+      let gugu = [];
+      // 여기에 작성
 
+      check(9, gugu.length, 18);
+      check("9-2", gugu[0], "2x1=2");
+      check("9-3", gugu[17], "3x9=27");
 
-    // [문제 5] for + if - 3의 배수
-    // 1부터 30까지 중 3의 배수의 개수를 세어 변수 count 에 담아라.
-    let count = 0;
-    // 여기에 작성
+      // [문제 10] for...of / 논리 연산자
+      // str = 'Hello JavaScript' 에서 모음(a, e, i, o, u, 대소문자 무관)의 개수를
+      // for...of 로 세어 변수 vowels 에 담아라.
+      let str = "Hello JavaScript";
+      let vowels = 0;
+      // 여기에 작성
 
-
-    check(5, count, 10);
-
-
-    // [문제 6] while 문
-    // n = 1 에서 시작해 n 을 2배씩 키울 때, 처음으로 1000을 넘는 n 의 값을 변수 over 에 담아라.
-    let n = 1;
-    // 여기에 작성
-    let over;
-
-
-    check(6, over, 1024);
-
-
-    // [문제 7] break
-    // 1부터 시작해서 숫자를 하나씩 더하다가 누적합이 50을 넘는 순간 반복을 멈춰라(break).
-    // 그 때의 숫자(i)를 변수 stopAt 에 담아라.
-    let total = 0;
-    let stopAt;
-    // 여기에 작성
-
-
-    check(7, stopAt, 10);
-
-
-    // [문제 8] continue
-    // 1부터 10까지 중 홀수만 더해서 변수 oddSum 에 담아라. (짝수는 continue 로 건너뛴다)
-    let oddSum = 0;
-    // 여기에 작성
-
-
-    check(8, oddSum, 25);
-
-
-    // [문제 9] 중첩 반복문 - 구구단
-    // 중첩 for 문으로 2단~3단의 결과를 '2x1=2' 형태의 문자열로 배열 gugu 에 순서대로 담아라.
-    // (2x1=2, 2x2=4, ... 2x9=18, 3x1=3, ... 3x9=27 → 총 18개)
-    let gugu = [];
-    // 여기에 작성
-
-
-    check(9, gugu.length, 18);
-    check('9-2', gugu[0], '2x1=2');
-    check('9-3', gugu[17], '3x9=27');
-
-
-    // [문제 10] for...of / 논리 연산자
-    // str = 'Hello JavaScript' 에서 모음(a, e, i, o, u, 대소문자 무관)의 개수를
-    // for...of 로 세어 변수 vowels 에 담아라.
-    let str = 'Hello JavaScript';
-    let vowels = 0;
-    // 여기에 작성
-
-
-    check(10, vowels, 5);
-  </script>
-</body>
+      check(10, vowels, 5);
+    </script>
+  </body>
 </html>
