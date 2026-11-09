@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Quiz Answer - Array</title>
+  <link rel="stylesheet" href="../quiz.css">
+</head>
+<body>
+  <h1>Array 정답 예시</h1>
+  <div id="result"></div>
+  <script src="../quiz.js"></script>
+  <script>
+    // 1
+    let fruits = ['apple', 'banana', 'cherry'];
+    let second = fruits[1];
+    check(1, second, 'banana');
+
+    // 2
+    let nums = [1, 2, 3];
+    nums.push(4);
+    let popped = nums.pop();
+    check(2, [nums, popped], [[1, 2, 3], 4]);
+
+    // 3
+    let list = ['b', 'c'];
+    list.unshift('a');
+    let first = list.shift();
+    check(3, [list, first], [['b', 'c'], 'a']);
+
+    // 4
+    let scores = [70, 85, 90, 65];
+    let t = 0;
+    for (let i = 0; i < scores.length; i++) t += scores[i];
+    let avg = t / scores.length;
+    check(4, avg, 77.5);
+
+    // 5
+    let values = [3, 17, 8, 42, 11];
+    let biggest = values[0];
+    for (const v of values) {
+      if (v > biggest) biggest = v;
+    }
+    check(5, biggest, 42);
+
+    // 6
+    let prices = [1000, 2000, 3000];
+    let discounted = prices.map(p => p * 0.9);
+    check(6, discounted, [900, 1800, 2700]);
+
+    // 7
+    let ages = [12, 25, 17, 30, 8, 19];
+    let adults = ages.filter(a => a >= 19);
+    check(7, adults, [25, 30, 19]);
+
+    // 8
+    let cart = [
+      { name: 'pen', price: 500 },
+      { name: 'book', price: 12000 },
+      { name: 'bag', price: 30000 }
+    ];
+    let totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
+    check(8, totalPrice, 42500);
+
+    // 9
+    let names = ['kim', 'lee', 'park', 'choi'];
+    let idx = names.indexOf('park');
+    let has = names.includes('lee');
+    let found = names.find(n => n.length === 4);
+    check(9, [idx, has, found], [2, true, 'park']);
+
+    // 10
+    let arr = [10, 20, 30, 40, 50];
+    let sliced = arr.slice(1, 4);
+    let removed = arr.splice(1, 2);
+    check(10, [sliced, removed, arr], [[20, 30, 40], [20, 30], [10, 40, 50]]);
+
+    // 11
+    let data = [10, 9, 100, 1];
+    let sortedData = data.sort((a, b) => a - b);
+    check(11, sortedData, [1, 9, 10, 100]);
+
+    // 12
+    let grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+    let gridSum = 0;
+    let diagonal = [];
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        gridSum += grid[i][j];
+        if (i === j) diagonal.push(grid[i][j]);
+      }
+    }
+    check(12, [gridSum, diagonal], [45, [1, 5, 9]]);
+  </script>
+</body>
+</html>

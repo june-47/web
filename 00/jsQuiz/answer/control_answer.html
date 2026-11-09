@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Quiz Answer - Control Statement</title>
+  <link rel="stylesheet" href="../quiz.css">
+</head>
+<body>
+  <h1>Control Statement 정답 예시</h1>
+  <div id="result"></div>
+  <script src="../quiz.js"></script>
+  <script>
+    // 1
+    let score = 85;
+    let grade;
+    if (score >= 90) grade = 'A';
+    else if (score >= 80) grade = 'B';
+    else if (score >= 70) grade = 'C';
+    else grade = 'F';
+    check(1, grade, 'B');
+
+    // 2
+    let num = 7;
+    let evenOdd = num % 2 === 0 ? '짝수' : '홀수';
+    check(2, evenOdd, '홀수');
+
+    // 3
+    let day = 3;
+    let dayName;
+    switch (day) {
+      case 1: dayName = '월'; break;
+      case 2: dayName = '화'; break;
+      case 3: dayName = '수'; break;
+      case 4: dayName = '목'; break;
+      case 5: dayName = '금'; break;
+      default: dayName = '주말';
+    }
+    check(3, dayName, '수');
+
+    // 4
+    let sum = 0;
+    for (let i = 1; i <= 100; i++) sum += i;
+    check(4, sum, 5050);
+
+    // 5
+    let count = 0;
+    for (let i = 1; i <= 30; i++) {
+      if (i % 3 === 0) count++;
+    }
+    check(5, count, 10);
+
+    // 6
+    let n = 1;
+    while (n <= 1000) n *= 2;
+    let over = n;
+    check(6, over, 1024);
+
+    // 7
+    let total = 0;
+    let stopAt;
+    for (let i = 1; ; i++) {
+      total += i;
+      if (total > 50) {
+        stopAt = i;
+        break;
+      }
+    }
+    check(7, stopAt, 10);
+
+    // 8
+    let oddSum = 0;
+    for (let i = 1; i <= 10; i++) {
+      if (i % 2 === 0) continue;
+      oddSum += i;
+    }
+    check(8, oddSum, 25);
+
+    // 9
+    let gugu = [];
+    for (let a = 2; a <= 3; a++) {
+      for (let b = 1; b <= 9; b++) {
+        gugu.push(`${a}x${b}=${a * b}`);
+      }
+    }
+    check(9, gugu.length, 18);
+    check('9-2', gugu[0], '2x1=2');
+    check('9-3', gugu[17], '3x9=27');
+
+    // 10
+    let str = 'Hello JavaScript';
+    let vowels = 0;
+    for (const ch of str.toLowerCase()) {
+      if ('aeiou'.includes(ch)) vowels++;
+    }
+    check(10, vowels, 5);
+  </script>
+</body>
+</html>

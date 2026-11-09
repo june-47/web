@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Quiz Answer - Function</title>
+  <link rel="stylesheet" href="../quiz.css">
+</head>
+<body>
+  <h1>Function 정답 예시</h1>
+  <div id="result"></div>
+  <script src="../quiz.js"></script>
+  <script>
+    // 1
+    function add(a, b) { return a + b; }
+    check(1, add(3, 4), 7);
+
+    // 2
+    const max = function (a, b) { return a > b ? a : b; };
+    check(2, max(10, 25), 25);
+
+    // 3
+    const square = n => n * n;
+    check(3, square(9), 81);
+
+    // 4
+    function greet(name = '손님') { return `안녕하세요, ${name}님`; }
+    check(4, greet('june'), '안녕하세요, june님');
+    check('4-2', greet(), '안녕하세요, 손님님');
+
+    // 5
+    function isEven(n) { return n % 2 === 0; }
+    check(5, [isEven(4), isEven(7)], [true, false]);
+
+    // 6
+    function sumTo(n) {
+      let s = 0;
+      for (let i = 1; i <= n; i++) s += i;
+      return s;
+    }
+    check(6, sumTo(10), 55);
+
+    // 7
+    function sumAll(...nums) {
+      let s = 0;
+      for (const x of nums) s += x;
+      return s;
+    }
+    check(7, sumAll(1, 2, 3, 4, 5), 15);
+
+    // 8
+    function factorial(n) {
+      if (n <= 1) return 1;
+      return n * factorial(n - 1);
+    }
+    check(8, factorial(5), 120);
+
+    // 9
+    function myMap(arr, fn) {
+      const result = [];
+      for (let i = 0; i < arr.length; i++) result.push(fn(arr[i]));
+      return result;
+    }
+    check(9, myMap([1, 2, 3], x => x * 10), [10, 20, 30]);
+
+    // 10
+    function makeCounter() {
+      let count = 0;
+      return function () { return ++count; };
+    }
+    const c1 = makeCounter();
+    const c2 = makeCounter();
+    c1(); c1();
+    check(10, [c1(), c2()], [3, 1]);
+  </script>
+</body>
+</html>
