@@ -80,7 +80,7 @@
       // 여기에 작성
       function sumTo(n) {
         let sum = 0;
-        for (let i=1;i<=n;i++) {
+        for (let i = 1; i <= n; i++) {
           sum += i;
         }
         return sum;
@@ -92,9 +92,12 @@
       // 인자를 몇 개든 받아서 모두 더해 반환하는 sumAll(...nums) 를 만들어라.
       // 여기에 작성
       function sumAll(...nums) {
-        
+        let sum = 0;
+        for (let i = 0; i < Number(nums.length); i++) {
+          sum += Number(nums[i]);
+        }
+        return sum;
       }
-
 
       check(
         7,

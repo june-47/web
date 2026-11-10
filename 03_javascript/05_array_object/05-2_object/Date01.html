@@ -28,9 +28,29 @@
             return "없는 요일";
         }
       }
+      //날짜 정보 출력 함수
+      function printInfo(title, dateObj, type) {
+        let year = dateObj.getFullYear();
+        let month = dateObj.getMonth() + 1; //0부터 시작하기 때문에 +1 해줌
+        let date = dateObj.getDate();
+        let day = dateObj.getDay();
+        document.write(`<h2>${title} (${type}) 방식</h2>`);
+        document.write(`${year}년 ${month}월 ${date}일 ${dayName(day)}<br>`);
+      }
 
       let basicDate = new Date();
-      console.log(dayName(basicDate.getDay()));
+      //basicDate를 dateObj로 변환
+      // console.log(dayName(basicDate.getDay()));
+      printInfo("오늘", basicDate, "아무것도 안 넣은");
+
+      //시작일 날짜 -> ',방식' ->인자 값
+      let startDate = new Date(2026, 9, 20);
+      printInfo("개강일", startDate, "2026,9,20");
+
+      //종강일 날짜 -> '-방식' -> 인자값 하나인 string 타입
+      //new Date('YYYY-MM-DD') -> 입력한 그대로
+      let finalDate = new Date("2027-04-07");
+      printInfo("종강일", finalDate, "2027-04-07");
     </script>
   </body>
 </html>
