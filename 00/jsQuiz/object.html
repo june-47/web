@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz - Object</title>
+    <link rel="stylesheet" href="quiz.css" />
+  </head>
+  <body>
+    <h1>Object 퀴즈</h1>
+    <p>각 주석을 읽고 코드를 작성한 뒤 저장 → 브라우저 새로고침.</p>
+    <div id="result"></div>
+
+    <script src="quiz.js"></script>
+    <script>
+      // [문제 1] 객체 만들기와 접근
+      // name 'june', age 25, hobbies ['coding', 'music'] 을 가진 객체 user 를 만들어라.
+      // 점(.) 표기법으로 name 을 userName 에, 대괄호([]) 표기법으로 age 를 userAge 에 담아라.
+      let user, userName, userAge;
+      // 여기에 작성
+
+      check(1, [userName, userAge, user && user.hobbies[1]], ["june", 25, "music"]);
+
+      // [문제 2] 속성 추가 / 수정 / 삭제 / in 연산자
+      // car = { brand: 'kia', year: 2020 } 에 대해
+      //  (a) color: 'red' 속성을 추가하고
+      //  (b) year 를 2024 로 바꾸고
+      //  (c) brand 속성을 delete 로 삭제하라.
+      //  (d) 'brand' 속성이 car 에 있는지 in 연산자로 확인해 hasBrand 에 담아라.
+      let car = { brand: "kia", year: 2020 };
+      let hasBrand;
+      // 여기에 작성
+
+      check(2, [car, hasBrand], [{ year: 2024, color: "red" }, false]);
+
+      // [문제 3] 메서드와 this
+      // count 속성(초기값 0)과 increase() 메서드를 가진 객체 counter 를 만들어라.
+      // increase() 를 호출할 때마다 this.count 가 1씩 증가해야 한다.
+      let counter;
+      // 여기에 작성
+
+      if (counter && typeof counter.increase === "function") {
+        counter.increase();
+        counter.increase();
+        counter.increase();
+        check(3, counter.count, 3);
+      } else {
+        check(3, "increase 메서드 없음", 3);
+      }
+
+      // [문제 4] Object.keys / values / entries
+      // stock = { apple: 3, banana: 0, cherry: 7 } 에 대해
+      //  (a) 키 배열을 names 에
+      //  (b) 재고 수량의 총합을 total 에 (Object.values + reduce)
+      //  (c) 재고가 1개 이상인 과일 이름만 모은 배열을 inStock 에 (Object.entries + filter + map)
+      let stock = { apple: 3, banana: 0, cherry: 7 };
+      let names, total, inStock;
+      // 여기에 작성
+
+      check(
+        4,
+        [names, total, inStock],
+        [["apple", "banana", "cherry"], 10, ["apple", "cherry"]],
+      );
+
+      // [문제 5] 구조 분해 할당 (중첩 / 이름 변경 / 기본값)
+      // person 에서 한 줄의 구조 분해로
+      //  - name 을 fullName 이라는 이름으로
+      //  - address 안의 city 를 city 로
+      //  - person 에 없는 nickname 은 기본값 '없음' 으로 꺼내라.
+      // (힌트: 이미 let 으로 선언된 변수에 할당할 땐 ({ ... } = person); 처럼 괄호로 감싼다)
+      let person = { name: "kim", address: { city: "Seoul", zip: "12345" } };
+      let fullName, city, nickname;
+      // 여기에 작성
+
+      check(5, [fullName, city, nickname], ["kim", "Seoul", "없음"]);
+
+      // [문제 6] 스프레드 연산자
+      // base = { a: 1, b: 2 } 에 대해
+      //  (a) base 를 펼쳐서 b 는 20 으로 덮어쓰고 c: 3 을 추가한 새 객체 merged 를 만들어라.
+      //  (b) base 의 얕은 복사본 copy 를 만들어라.
+      // base 자체는 바뀌면 안 된다.
+      const base = { a: 1, b: 2 };
+      let merged, copy;
+      // 여기에 작성
+
+      check(
+        6,
+        [merged, base, copy && copy !== base, copy],
+        [{ a: 1, b: 20, c: 3 }, { a: 1, b: 2 }, true, { a: 1, b: 2 }],
+      );
+
+      // [문제 7] 옵셔널 체이닝(?.) 과 널 병합(??)
+      // 사용자 객체를 받아 user.address.city 를 반환하되,
+      // address 가 없거나 user 자체가 null 이어도 에러 없이 '미입력' 을 반환하는 getCity(user) 를 만들어라.
+      // 여기에 작성
+
+      check(
+        7,
+        typeof getCity === "function"
+          ? [getCity({ address: { city: "busan" } }), getCity({}), getCity(null)]
+          : "getCity 함수 없음",
+        ["busan", "미입력", "미입력"],
+      );
+
+      // [문제 8] 객체로 빈도수 세기
+      // words 배열에서 각 단어가 몇 번 나왔는지 세어 객체 freq 에 담아라.
+      let words = ["a", "b", "a", "c", "b", "a"];
+      let freq = {};
+      // 여기에 작성
+
+      check(8, freq, { a: 3, b: 2, c: 1 });
+
+      // [문제 9] entries + sort 로 순위 만들기
+      // scores 에서 점수가 높은 상위 2명의 이름을 점수 내림차순 배열 top2 에 담아라.
+      let scores = { june: 80, mina: 95, tom: 70, sora: 88 };
+      let top2;
+      // 여기에 작성
+
+      check(9, top2, ["mina", "sora"]);
+
+      // [문제 10] 참조 복사 vs 깊은 복사
+      // original 의 얕은 복사본 shallow (스프레드 사용) 와
+      // 깊은 복사본 deep (structuredClone 사용) 을 만들어라.
+      // 그 뒤 original.nested.y 를 99 로 바꾸면, shallow 는 영향을 받고 deep 은 받지 않아야 한다.
+      const original = { x: 1, nested: { y: 2 } };
+      let shallow, deep;
+      // 여기에 작성
+      original.nested.y = 99; // (수정하지 마세요)
+
+      check(10, [shallow && shallow.nested.y, deep && deep.nested.y], [99, 2]);
+
+      // [문제 11] 단축 속성명과 계산된 속성명
+      // 변수 name, price 와 key, value 가 있다.
+      // 단축 속성명으로 name, price 를, 계산된 속성명([ ])으로 key 이름의 속성에 value 를 넣어
+      // 객체 item 을 만들어라.  →  { name: 'tv', price: 500, color: 'blue' }
+      let name = "tv";
+      let price = 500;
+      let key = "color";
+      let value = "blue";
+      let item;
+      // 여기에 작성
+
+      check(11, item, { name: "tv", price: 500, color: "blue" });
+
+      // [문제 12] Object.freeze
+      // config 객체가 변경되지 않도록 Object.freeze 를 적용하라.
+      const config = { port: 3000 };
+      // 여기에 작성
+      config.port = 8080; // (수정하지 마세요) 동결됐다면 무시된다
+
+      check(12, [config.port, Object.isFrozen(config)], [3000, true]);
+
+      // [문제 13] JSON
+      // data 를 JSON.stringify 로 문자열 str 로 만들고, 다시 JSON.parse 로 객체 back 으로 되돌려라.
+      const data = { id: 1, tags: ["a", "b"] };
+      let str, back;
+      // 여기에 작성
+
+      check(
+        13,
+        [typeof str, str, back, back !== data],
+        ["string", '{"id":1,"tags":["a","b"]}', { id: 1, tags: ["a", "b"] }, true],
+      );
+    </script>
+  </body>
+</html>

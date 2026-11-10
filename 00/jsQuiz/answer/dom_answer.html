@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz Answer - DOM</title>
+    <link rel="stylesheet" href="../quiz.css" />
+    <link rel="stylesheet" href="dom_answer.css" />
+  </head>
+  <body>
+    <h1>DOM 정답 예시</h1>
+    <p>
+      JS 뿐 아니라 HTML(문제 10)과 dom.css(문제 12)도 수정해야 하는 문제가 있습니다.
+      아래 #stage 안의 요소들을 대상으로 문제를 풉니다. 문제는 위에서 아래로 순서대로
+      실행되므로, 앞 문제의 결과가 뒤 문제에 영향을 줍니다.
+    </p>
+    <div id="result"></div>
+
+    <section id="stage">
+      <h2 id="heading">원래 제목</h2>
+      <ul id="fruits">
+        <li class="item">apple</li>
+        <li class="item">banana</li>
+        <li class="item special" data-id="42">cherry</li>
+      </ul>
+      <p id="msg">hello</p>
+      <button id="btn">클릭</button>
+      <span id="count">0</span>
+      <div id="box" class="card">박스</div>
+      <a id="link" href="#">링크</a>
+
+      <!-- [문제 10] 여기에 HTML 작성: id 가 todoInput 인 <input> 과 id 가 addBtn 인 <button>(글자 '추가') -->
+      <input id="todoInput" type="text" />
+      <button id="addBtn">추가</button>
+      <ul id="todoList"></ul>
+    </section>
+
+    <script src="../quiz.js"></script>
+    <script>
+      const $ = (id) => document.getElementById(id); // 채점 도우미 (수정하지 마세요)
+
+      // [문제 1] 요소 선택과 읽기
+      //  headingText : #heading 의 텍스트
+      //  itemCount   : 클래스 item 인 요소의 개수 (querySelectorAll)
+      //  specialText : 클래스 special 인 요소의 텍스트 (querySelector)
+      //  dataId      : .special 요소의 data-id 값 (dataset 사용)
+      let headingText, itemCount, specialText, dataId;
+      // 여기에 작성
+      headingText = document.getElementById("heading").textContent;
+      itemCount = document.querySelectorAll(".item").length;
+      specialText = document.querySelector(".special").textContent;
+      dataId = document.querySelector(".special").dataset.id;
+
+      check(
+        1,
+        [headingText, itemCount, specialText, dataId],
+        ["원래 제목", 3, "cherry", "42"],
+      );
+
+      // [문제 2] 내용 바꾸기
+      //  #heading 의 텍스트를 '바뀐 제목' 으로,
+      //  #msg 의 내용을 HTML '<b>굵게</b>' 로 바꿔라. (textContent / innerHTML)
+      // 여기에 작성
+      $("heading").textContent = "바뀐 제목";
+      $("msg").innerHTML = "<b>굵게</b>";
+
+      check(
+        2,
+        [$("heading").textContent, $("msg").querySelector("b")?.textContent],
+        ["바뀐 제목", "굵게"],
+      );
+
+      // [문제 3] classList
+      // #box 에 대해 순서대로: 'active' 추가 → 'big' 추가 → 'big' 제거 → 'dark' toggle
+      // 최종 className 은 'card active dark' 가 되어야 한다.
+      // 여기에 작성
+      const box = $("box");
+      box.classList.add("active");
+      box.classList.add("big");
+      box.classList.remove("big");
+      box.classList.toggle("dark");
+
+      check(3, $("box").className, "card active dark");
+
+      // [문제 4] style
+      // #msg 의 글자색을 'red' 로, 글자 크기를 '24px' 로 JS 로 바꿔라. (element.style)
+      // 여기에 작성
+      $("msg").style.color = "red";
+      $("msg").style.fontSize = "24px";
+
+      check(
+        4,
+        [$("msg").style.color, getComputedStyle($("msg")).fontSize],
+        ["red", "24px"],
+      );
+
+      // [문제 5] 요소 생성과 추가
+      // fruitsToAdd 의 각 이름으로 <li class="item"> 요소를 만들어 #fruits 의 끝에 추가하라.
+      // (createElement, textContent, classList, appendChild 사용)
+      const fruitsToAdd = ["kiwi", "melon"];
+      // 여기에 작성
+      for (const name of fruitsToAdd) {
+        const li = document.createElement("li");
+        li.className = "item";
+        li.textContent = name;
+        $("fruits").appendChild(li);
+      }
+
+      check(
+        5,
+        [...$("fruits").children].map((li) => li.textContent),
+        ["apple", "banana", "cherry", "kiwi", "melon"],
+      );
+
+      // [문제 6] 요소 제거
+      // 첫 번째 .item (apple) 을 DOM 에서 제거하라. (remove)
+      // 여기에 작성
+      document.querySelector(".item").remove();
+
+      check(
+        6,
+        [...$("fruits").children].map((li) => li.textContent),
+        ["banana", "cherry", "kiwi", "melon"],
+      );
+
+      // [문제 7] 속성 다루기
+      // #link 의 href 를 'https://example.com' 으로, target 을 '_blank' 로 설정하라.
+      // (setAttribute 와 프로퍼티 중 편한 방법 사용)
+      // 여기에 작성
+      $("link").setAttribute("href", "https://example.com");
+      $("link").target = "_blank";
+
+      check(
+        7,
+        [$("link").getAttribute("href"), $("link").getAttribute("target")],
+        ["https://example.com", "_blank"],
+      );
+
+      // [문제 8] 이벤트 리스너
+      // #btn 을 클릭할 때마다 #count 의 숫자가 1씩 증가하게 하라. (addEventListener)
+      // 채점 코드가 버튼을 3번 클릭한다.
+      // 여기에 작성
+      $("btn").addEventListener("click", () => {
+        $("count").textContent = Number($("count").textContent) + 1;
+      });
+
+      $("btn").click();
+      $("btn").click();
+      $("btn").click(); // (수정하지 마세요)
+      check(8, $("count").textContent, "3");
+
+      // [문제 9] DOM 탐색
+      // .special 요소를 기준으로
+      //  parentId : 부모 요소의 id
+      //  prevText : 바로 앞 형제 요소의 텍스트 (previousElementSibling)
+      //  nextText : 바로 뒤 형제 요소의 텍스트 (nextElementSibling)
+      let parentId, prevText, nextText;
+      // 여기에 작성
+      const sp = document.querySelector(".special");
+      parentId = sp.parentElement.id;
+      prevText = sp.previousElementSibling.textContent;
+      nextText = sp.nextElementSibling.textContent;
+
+      check(9, [parentId, prevText, nextText], ["fruits", "banana", "kiwi"]);
+
+      // [문제 10] HTML 직접 수정
+      // 위쪽 HTML 의 [문제 10] 주석 자리에
+      // id 가 todoInput 인 <input> 과 id 가 addBtn 인 <button>(글자 '추가') 를 직접 작성하라.
+      // (이 JS 영역에는 쓸 코드가 없다)
+      check(
+        10,
+        [$("todoInput")?.tagName, $("addBtn")?.tagName, $("addBtn")?.textContent.trim()],
+        ["INPUT", "BUTTON", "추가"],
+      );
+
+      // [문제 11] 할 일 추가 기능
+      // #addBtn 을 클릭하면 #todoInput 의 값으로 <li> 를 만들어 #todoList 에 추가하고, 입력창을 비워라.
+      // 단, 입력값이 공백뿐이면(빈 문자열 포함) 아무것도 추가하지 않는다. (trim 사용)
+      // 여기에 작성
+      $("addBtn")?.addEventListener("click", () => {
+        const text = $("todoInput").value.trim();
+        if (text === "") return;
+        const li = document.createElement("li");
+        li.textContent = text;
+        $("todoList").appendChild(li);
+        $("todoInput").value = "";
+      });
+
+      if ($("todoInput") && $("addBtn")) {
+        $("todoInput").value = "study";
+        $("addBtn").click();
+        $("todoInput").value = "   ";
+        $("addBtn").click();
+        $("todoInput").value = "exercise";
+        $("addBtn").click(); // (수정하지 마세요)
+      }
+      check(
+        11,
+        [
+          [...$("todoList").children].map((li) => li.textContent),
+          $("todoInput")?.value,
+        ],
+        [["study", "exercise"], ""],
+      );
+
+      // [문제 12] CSS 직접 수정 (dom.css)
+      // dom.css 의 [문제 12] 주석대로 규칙을 작성하라. (이 JS 영역에는 쓸 코드가 없다)
+      const tmp = document.createElement("div");
+      tmp.className = "hidden";
+      document.body.appendChild(tmp);
+      const cs = getComputedStyle($("box"));
+      check(
+        12,
+        [
+          cs.paddingTop,
+          cs.borderTopWidth,
+          cs.borderTopStyle,
+          cs.backgroundColor,
+          getComputedStyle(tmp).display,
+          getComputedStyle(document.querySelector(".special")).fontWeight,
+        ],
+        ["20px", "2px", "solid", "rgb(255, 255, 0)", "none", "700"],
+      );
+      tmp.remove();
+    </script>
+  </body>
+</html>

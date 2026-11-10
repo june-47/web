@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz - BOM</title>
+    <link rel="stylesheet" href="quiz.css" />
+  </head>
+  <body>
+    <h1>BOM 퀴즈</h1>
+    <p>
+      각 주석을 읽고 코드를 작성한 뒤 저장 → 브라우저 새로고침. 타이머 문제는
+      결과가 잠시 뒤 아래쪽에 나타납니다.
+    </p>
+    <div id="result"></div>
+
+    <script src="quiz.js"></script>
+    <script>
+      // 이전 실행 흔적 정리 (수정하지 마세요)
+      localStorage.removeItem("settings");
+      sessionStorage.removeItem("visits");
+
+      // [문제 1] window
+      // 브라우저 창 내부 너비(window.innerWidth)가 768px 이상이면 true, 아니면 false 를 isWide 에 담아라.
+      let isWide;
+      // 여기에 작성
+
+      check(1, isWide, window.innerWidth >= 768);
+
+      // [문제 2] location
+      // 현재 페이지 주소(location.pathname)에서 파일명만 뽑아(예: '/a/b/bom.html' → 'bom.html') fileName 에 담아라.
+      let fileName;
+      // 여기에 작성
+
+      check(2, fileName, location.href.match(/([^/?#]+)(?:[?#].*)?$/)[1]);
+
+      // [문제 3] URL 분석
+      // url 문자열을 new URL() 로 만들어
+      //  host 를 host 에, pathname 을 path 에, 쿼리 size 의 값을 숫자로 바꿔 size 에 담아라.
+      const url = "https://example.com/shop?item=shoes&size=270&color=red";
+      let host, path, size;
+      // 여기에 작성
+
+      check(3, [host, path, size], ["example.com", "/shop", 270]);
+
+      // [문제 4] location.hash
+      // 주소의 해시를 '#section2' 로 바꾸고(location.hash 에 대입), 바꾼 뒤의 location.hash 를 hashValue 에 담아라.
+      let hashValue;
+      // 여기에 작성
+
+      check(4, hashValue, "#section2");
+      history.replaceState(null, "", location.pathname + location.search); // 정리 (수정하지 마세요)
+
+      // [문제 5] history.pushState
+      // history.pushState 로 상태 { page: 2 } 를 쌓되, 주소의 해시는 '#page-2' 가 되게 하라.
+      // (title 인자는 '' 로)
+      // 여기에 작성
+
+      check(5, [history.state, location.hash], [{ page: 2 }, "#page-2"]);
+      history.replaceState(null, "", location.pathname + location.search); // 정리 (수정하지 마세요)
+
+      // [문제 6] setTimeout
+      // 0.1초(100ms) 뒤에 timeoutResult 를 'done' 으로 바꾸는 타이머를 설정하라.
+      // (0.4초 뒤에 채점된다)
+      let timeoutResult = "waiting";
+      // 여기에 작성
+
+      setTimeout(() => check(6, timeoutResult, "done"), 400);
+
+      // [문제 7] setInterval / clearInterval
+      // 50ms 마다 ticks 를 1씩 증가시키다가, 3이 되면 clearInterval 로 멈춰라.
+      // (0.6초 뒤에 채점된다 - 3보다 커지면 안 된다)
+      let ticks = 0;
+      // 여기에 작성
+
+      setTimeout(() => check(7, ticks, 3), 600);
+
+      // [문제 8] localStorage
+      // settings = { theme: 'dark', fontSize: 16 } 을 JSON 문자열로 바꿔 localStorage 의 'settings' 키에 저장하고,
+      // 다시 꺼내 객체로 파싱해 loaded 에 담아라.
+      const settings = { theme: "dark", fontSize: 16 };
+      let loaded;
+      // 여기에 작성
+
+      check(8, loaded, { theme: "dark", fontSize: 16 });
+
+      // [문제 8-2] localStorage 삭제
+      // 'settings' 키를 localStorage 에서 삭제하라.
+      // 여기에 작성
+
+      check("8-2", localStorage.getItem("settings"), null);
+
+      // [문제 9] sessionStorage + 함수
+      // 호출할 때마다 sessionStorage 의 'visits' 값을 1 증가시켜 저장하고, 증가된 값을 숫자로 반환하는 visit() 을 만들어라.
+      // (sessionStorage 에는 문자열로 저장되므로 Number 변환 필요. 값이 없으면 0 부터 시작)
+      // 여기에 작성
+
+      check(
+        9,
+        typeof visit === "function" ? [visit(), visit(), visit()] : "visit 함수 없음",
+        [1, 2, 3],
+      );
+
+      // [문제 10] Promise + setTimeout
+      // ms 밀리초 뒤에 resolve 되는 Promise 를 반환하는 wait(ms) 를 만들어라.
+      // 그리고 wait(100).then(...) 으로 waited 를 true 로 바꿔라. (0.4초 뒤에 채점된다)
+      let waited = false;
+      // 여기에 작성
+
+      setTimeout(() => check(10, waited, true), 400);
+    </script>
+  </body>
+</html>

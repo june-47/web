@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz - Mix</title>
+    <link rel="stylesheet" href="quiz.css" />
+  </head>
+  <body>
+    <h1>Mix 퀴즈 (Array + Object + Function + Control)</h1>
+    <p>배운 내용을 섞어서 푸는 종합 문제. 각 주석을 읽고 작성한 뒤 저장 → 새로고침.</p>
+    <div id="result"></div>
+
+    <script src="quiz.js"></script>
+    <script>
+      // [문제 1] 객체 배열 집계
+      // students 에서
+      //  (a) 평균 점수를 avgScore 에 (소수 그대로)
+      //  (b) 최고 점수 학생의 이름을 topName 에 담아라.
+      const students = [
+        { name: "june", score: 80 },
+        { name: "mina", score: 95 },
+        { name: "tom", score: 65 },
+      ];
+      let avgScore, topName;
+      // 여기에 작성
+
+      check(1, [avgScore, topName], [80, "mina"]);
+
+      // [문제 2] groupBy 함수
+      // 배열과 키 추출 함수를 받아, 키별로 요소를 묶은 객체를 반환하는 groupBy(arr, fn) 을 만들어라.
+      // 예) groupBy(['one','two','three'], w => w.length) → { 3: ['one','two'], 5: ['three'] }
+      // 여기에 작성
+
+      check(
+        2,
+        typeof groupBy === "function"
+          ? groupBy(["one", "two", "three"], (w) => w.length)
+          : "groupBy 함수 없음",
+        { 3: ["one", "two"], 5: ["three"] },
+      );
+
+      // [문제 3] 중복 제거
+      // 배열에서 중복을 제거한 새 배열(처음 등장한 순서 유지)을 반환하는 unique(arr) 를 만들어라.
+      // 여기에 작성
+
+      check(
+        3,
+        typeof unique === "function" ? unique([1, 2, 2, 3, 1, 4]) : "unique 함수 없음",
+        [1, 2, 3, 4],
+      );
+
+      // [문제 4] 팰린드롬
+      // 문자열이 앞에서 읽어도 뒤에서 읽어도 같은지(대소문자·공백 무시) true/false 로 반환하는 isPalindrome(str) 을 만들어라.
+      // 힌트: toLowerCase, replace(/\s/g, ''), split, reverse, join
+      // 여기에 작성
+
+      check(
+        4,
+        typeof isPalindrome === "function"
+          ? [isPalindrome("Level"), isPalindrome("never odd or even"), isPalindrome("hello")]
+          : "isPalindrome 함수 없음",
+        [true, true, false],
+      );
+
+      // [문제 5] FizzBuzz
+      // 1부터 n 까지 순회하며 3의 배수는 'Fizz', 5의 배수는 'Buzz', 둘 다의 배수는 'FizzBuzz', 그 외엔 숫자 그대로 담은
+      // 배열을 반환하는 fizzBuzz(n) 을 만들어라.
+      // 여기에 작성
+
+      check(
+        5,
+        typeof fizzBuzz === "function" ? fizzBuzz(15) : "fizzBuzz 함수 없음",
+        [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"],
+      );
+
+      // [문제 6] 피보나치
+      // 피보나치 수열의 처음 n 개를 배열로 반환하는 fibonacci(n) 을 만들어라. (0, 1, 1, 2, 3, 5, ...)
+      // 여기에 작성
+
+      check(
+        6,
+        typeof fibonacci === "function" ? fibonacci(8) : "fibonacci 함수 없음",
+        [0, 1, 1, 2, 3, 5, 8, 13],
+      );
+
+      // [문제 7] 다중 조건 정렬
+      // products 를 가격 오름차순으로, 가격이 같으면 이름 오름차순(가나다/abc)으로 정렬한 새 배열 sorted 를 만들어라.
+      // (원본 products 는 바뀌면 안 된다. 힌트: [...products] 또는 slice, localeCompare)
+      const products = [
+        { name: "pen", price: 500 },
+        { name: "bag", price: 3000 },
+        { name: "ink", price: 500 },
+        { name: "cap", price: 1500 },
+      ];
+      let sorted;
+      // 여기에 작성
+
+      check(
+        7,
+        [sorted && sorted.map((p) => p.name), products.map((p) => p.name)],
+        [
+          ["ink", "pen", "cap", "bag"],
+          ["pen", "bag", "ink", "cap"],
+        ],
+      );
+
+      // [문제 8] 카테고리별 합계
+      // orders 를 reduce 로 순회해 category 별 (price × qty) 합계를 객체 totals 에 담아라.
+      const orders = [
+        { category: "food", price: 2000, qty: 3 },
+        { category: "toy", price: 10000, qty: 1 },
+        { category: "food", price: 500, qty: 4 },
+      ];
+      let totals;
+      // 여기에 작성
+
+      check(8, totals, { food: 8000, toy: 10000 });
+
+      // [문제 9] 함수를 반환하는 함수
+      // 숫자 n 을 받아 "받은 수에 n 을 곱해 반환하는 함수" 를 돌려주는 multiplier(n) 을 만들어라.
+      // 여기에 작성
+
+      check(
+        9,
+        typeof multiplier === "function" && typeof multiplier(2) === "function"
+          ? [multiplier(2)(5), multiplier(10)(7)]
+          : "multiplier 함수 없음",
+        [10, 70],
+      );
+
+      // [문제 10] 2차원 배열 전치(transpose)
+      // 행과 열을 뒤바꾼 새 2차원 배열을 반환하는 transpose(matrix) 를 만들어라.
+      // 예) [[1,2,3],[4,5,6]] → [[1,4],[2,5],[3,6]]
+      // 여기에 작성
+
+      check(
+        10,
+        typeof transpose === "function"
+          ? transpose([
+              [1, 2, 3],
+              [4, 5, 6],
+            ])
+          : "transpose 함수 없음",
+        [
+          [1, 4],
+          [2, 5],
+          [3, 6],
+        ],
+      );
+    </script>
+  </body>
+</html>
