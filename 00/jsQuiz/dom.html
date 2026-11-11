@@ -9,9 +9,9 @@
   <body>
     <h1>DOM 퀴즈</h1>
     <p>
-      JS 뿐 아니라 HTML(문제 10)과 dom.css(문제 12)도 수정해야 하는 문제가 있습니다.
-      아래 #stage 안의 요소들을 대상으로 문제를 풉니다. 문제는 위에서 아래로 순서대로
-      실행되므로, 앞 문제의 결과가 뒤 문제에 영향을 줍니다.
+      JS 뿐 아니라 HTML(문제 10)과 dom.css(문제 12)도 수정해야 하는 문제가
+      있습니다. 아래 #stage 안의 요소들을 대상으로 문제를 풉니다. 문제는 위에서
+      아래로 순서대로 실행되므로, 앞 문제의 결과가 뒤 문제에 영향을 줍니다.
     </p>
     <div id="result"></div>
 
@@ -29,6 +29,8 @@
       <a id="link" href="#">링크</a>
 
       <!-- [문제 10] 여기에 HTML 작성: id 가 todoInput 인 <input> 과 id 가 addBtn 인 <button>(글자 '추가') -->
+      <input type="text" id="todoInput" />
+      <button id="addBtn">추가</button>
       <ul id="todoList"></ul>
     </section>
 
@@ -43,6 +45,8 @@
       //  dataId      : .special 요소의 data-id 값 (dataset 사용)
       let headingText, itemCount, specialText, dataId;
       // 여기에 작성
+      headingText = document.getElementById("heading").textContent;
+      itemCount = document.querySelectorAll(".item").length;
 
       check(
         1,
@@ -137,7 +141,11 @@
       // (이 JS 영역에는 쓸 코드가 없다)
       check(
         10,
-        [$("todoInput")?.tagName, $("addBtn")?.tagName, $("addBtn")?.textContent.trim()],
+        [
+          $("todoInput")?.tagName,
+          $("addBtn")?.tagName,
+          $("addBtn")?.textContent.trim(),
+        ],
         ["INPUT", "BUTTON", "추가"],
       );
 

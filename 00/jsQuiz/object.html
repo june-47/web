@@ -17,8 +17,19 @@
       // 점(.) 표기법으로 name 을 userName 에, 대괄호([]) 표기법으로 age 를 userAge 에 담아라.
       let user, userName, userAge;
       // 여기에 작성
+      user = {
+        name: "june",
+        age: 25,
+        hobbies: ["coding", "music"],
+      };
+      userName = user.name;
+      userAge = user["age"];
 
-      check(1, [userName, userAge, user && user.hobbies[1]], ["june", 25, "music"]);
+      check(
+        1,
+        [userName, userAge, user && user.hobbies[1]],
+        ["june", 25, "music"],
+      );
 
       // [문제 2] 속성 추가 / 수정 / 삭제 / in 연산자
       // car = { brand: 'kia', year: 2020 } 에 대해
@@ -29,6 +40,10 @@
       let car = { brand: "kia", year: 2020 };
       let hasBrand;
       // 여기에 작성
+      car.color = "red";
+      car.year = 2024;
+      delete car.brand;
+      hasBrand = "brand" in car;
 
       check(2, [car, hasBrand], [{ year: 2024, color: "red" }, false]);
 
@@ -37,6 +52,12 @@
       // increase() 를 호출할 때마다 this.count 가 1씩 증가해야 한다.
       let counter;
       // 여기에 작성
+      counter = {
+        count: 0,
+        increase() {
+          this.count++;
+        },
+      };
 
       if (counter && typeof counter.increase === "function") {
         counter.increase();
@@ -55,6 +76,9 @@
       let stock = { apple: 3, banana: 0, cherry: 7 };
       let names, total, inStock;
       // 여기에 작성
+      names = Object.keys(stock);
+      total = Object.values(stock).reduce((a, b) => a + b, 0);
+      inStock = Object.entries(stock).filter()
 
       check(
         4,
@@ -97,7 +121,11 @@
       check(
         7,
         typeof getCity === "function"
-          ? [getCity({ address: { city: "busan" } }), getCity({}), getCity(null)]
+          ? [
+              getCity({ address: { city: "busan" } }),
+              getCity({}),
+              getCity(null),
+            ]
           : "getCity 함수 없음",
         ["busan", "미입력", "미입력"],
       );
@@ -159,7 +187,12 @@
       check(
         13,
         [typeof str, str, back, back !== data],
-        ["string", '{"id":1,"tags":["a","b"]}', { id: 1, tags: ["a", "b"] }, true],
+        [
+          "string",
+          '{"id":1,"tags":["a","b"]}',
+          { id: 1, tags: ["a", "b"] },
+          true,
+        ],
       );
     </script>
   </body>
