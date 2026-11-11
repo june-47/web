@@ -50,12 +50,12 @@
       // [문제 3] 메서드와 this
       // count 속성(초기값 0)과 increase() 메서드를 가진 객체 counter 를 만들어라.
       // increase() 를 호출할 때마다 this.count 가 1씩 증가해야 한다.
-      let counter;
+
       // 여기에 작성
-      counter = {
+      let counter = {
         count: 0,
-        increase() {
-          this.count++;
+        increase: function () {
+          return this.count++;
         },
       };
 
@@ -78,7 +78,9 @@
       // 여기에 작성
       names = Object.keys(stock);
       total = Object.values(stock).reduce((a, b) => a + b, 0);
-      inStock = Object.entries(stock).filter()
+      inStock = Object.entries(stock)
+        .filter(([, n]) => n > 0)
+        .map(([name]) => name);
 
       check(
         4,

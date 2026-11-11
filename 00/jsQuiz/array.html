@@ -60,8 +60,11 @@
       // [문제 5] 최댓값 찾기
       // values = [3, 17, 8, 42, 11] 에서 가장 큰 값을 (Math.max 쓰지 말고) 반복문으로 찾아 변수 biggest 에 담아라.
       let values = [3, 17, 8, 42, 11];
-      let biggest;
+      let biggest = values[0];
       // 여기에 작성
+      for (const v of values) {
+        if (v > biggest) biggest = v;
+      }
 
       check(5, biggest, 42);
 
@@ -94,8 +97,8 @@
         { name: "book", price: 12000 },
         { name: "bag", price: 30000 },
       ];
-      let totalPrice;
       // 여기에 작성
+      let totalPrice = cart.reduce((acc, item) => acc + item.price, 0);
 
       check(8, totalPrice, 42500);
 
@@ -107,6 +110,9 @@
       let names = ["kim", "lee", "park", "choi"];
       let idx, has, found;
       // 여기에 작성
+      idx = names.indexOf("park");
+      has = names.includes("lee") ? true : false;
+      found = names.find((n) => n.length === 4);
 
       check(9, [idx, has, found], [2, true, "park"]);
 
@@ -152,6 +158,11 @@
       let gridSum = 0;
       let diagonal = [];
       // 여기에 작성
+      for (const v of grid) {
+        for (v of this.item) {
+          
+        }
+      }
 
       check(12, [gridSum, diagonal], [45, [1, 5, 9]]);
     </script>
