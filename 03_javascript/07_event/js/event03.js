@@ -61,6 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 9.
   triggerBtn.addEventListener("click", () => {
-    console.log(`${triggerBtn}`);
+    console.log("triggerBtn");
   });
 }); //end

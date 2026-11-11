@@ -10,39 +10,102 @@ document.addEventListener("DOMContentLoaded", () => {
   const $info = document.querySelector(".js-info");
 
   //초기화(reset) 버튼
-  const $refresh= document.querySelector(".js-refresh");
+  const $refresh = document.querySelector(".js-refresh");
 
   //사용자 키 목록
-  const keys = ['Q', 'W', 'E', 'R', 'A', 'S', 'D', 'F', 'Z', 'X', 'C', 'V'];
+  const keys = ["Q", "W", "E", "R", "A", "S", "D", "F", "Z", "X", "C", "V"];
 
   //한 줄에 배치할 키 개수(4개)
   const KEY_COUNT = 4;
+  $keyContainers.forEach((container, containerIndex) => {
+    for (let i = 0; i < KEY_COUNT; i++) {
+      const keyIndex = containerIndex * KEY_COUNT + i;
+      if (keyIndex < keys.length) {
+        const key = keys[keyIndex];
+        const $button = document.createElement("button");
+        $button.textContent = key;
+        $button.setAttribute("type", "button");
+        $button.dataset.key = key.toLowerCase();
+        //dataset 속성으로 키값 저장(소문자)
+        container.appendChild($button);
+      }
+    }
+  });
 
-  
+  //키보드 키 누름(keydown 이벤트)
+  document.addEventListener("keydown", (e) => {
+    // console.log(e.key); 어떤 키를 눌렀는지 확인해야 함
+    const allowKeys = [
+      ...document.querySelectorAll('[data-type="keydown"] button'),
+    ].map(
+      //querySelectorAll -> 배열로 주지 않음 >> 배열에 넣어야 함
+      (key) => key.dataset.key,
+    );
 
+    //허용되지 않은 키면 무시한다
+    if (!allowKeys.includes(e.key)) {
+      return;
+    }
 
+    //현재 이벤트 타입과 눌린 키 정보를 출력
+    $info.textContent = `type = ${e.type}, key = ${e.key}`;
 
+    //해당 키 버튼에 pressed 클래스 추가
+    const $target = document.querySelector(`[data-key="${e.key}"]`);
+    $target.classList.add("pressed");
+  });
 
+  //키보드 키 누름(keypress 이벤트)
+  document.addEventListener("keypress", (e) => {
+    // console.log(e.key); 어떤 키를 눌렀는지 확인해야 함
+    const allowKeys = [
+      ...document.querySelectorAll('[data-type="keypress"] button'),
+    ].map(
+      //querySelectorAll -> 배열로 주지 않음 >> 배열에 넣어야 함
+      (key) => key.dataset.key,
+    );
 
+    //허용되지 않은 키면 무시한다
+    if (!allowKeys.includes(e.key)) {
+      return;
+    }
 
+    //현재 이벤트 타입과 눌린 키 정보를 출력
+    $info.textContent = `type = ${e.type}, key = ${e.key}`;
 
+    //해당 키 버튼에 pressed 클래스 추가
+    const $target = document.querySelector(`[data-key="${e.key}"]`);
+    $target.classList.add("pressed");
+  });
 
+  //키보드 키 뗌(keyup 이벤트)
+  document.addEventListener("keyup", (e) => {
+    // console.log(e.key); 어떤 키를 눌렀는지 확인해야 함
+    const allowKeys = [
+      ...document.querySelectorAll('[data-type="keyup"] button'),
+    ].map(
+      //querySelectorAll -> 배열로 주지 않음 >> 배열에 넣어야 함
+      (key) => key.dataset.key,
+    );
 
+    //허용되지 않은 키면 무시한다
+    if (!allowKeys.includes(e.key)) {
+      return;
+    }
 
+    //현재 이벤트 타입과 눌린 키 정보를 출력
+    $info.textContent = `type = ${e.type}, key = ${e.key}`;
 
+    //해당 키 버튼에 pressed 클래스 추가
+    const $target = document.querySelector(`[data-key="${e.key}"]`);
+    $target.classList.add("pressed");
+  });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  //새로고침(reset) 버튼 - 모든 pressed 클래스 제거 + 출력영역 초기화
+  $refresh.addEventListener("click", () => {
+    $info.textContent = "-";
+    [...document.querySelectorAll("[data-key]")].forEach((key) => {
+      key.classList.remove("pressed");
+    });
+  });
 }); //end

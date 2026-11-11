@@ -48,6 +48,7 @@
       headingText = document.getElementById("heading").textContent;
       itemCount = document.querySelectorAll(".item").length;
       specialText = document.querySelector(".special").textContent;
+      dataId = document.querySelector(".special").dataset.id;
 
       check(
         1,
@@ -59,6 +60,9 @@
       //  #heading 의 텍스트를 '바뀐 제목' 으로,
       //  #msg 의 내용을 HTML '<b>굵게</b>' 로 바꿔라. (textContent / innerHTML)
       // 여기에 작성
+      document.getElementById("heading").textContent = "바뀐 제목";
+      document.getElementById("msg").innerHTML = `<b>굵게</b>`;
+
 
       check(
         2,
@@ -70,12 +74,20 @@
       // #box 에 대해 순서대로: 'active' 추가 → 'big' 추가 → 'big' 제거 → 'dark' toggle
       // 최종 className 은 'card active dark' 가 되어야 한다.
       // 여기에 작성
+      const box = $("box");
+      box.classList.add('active');
+      box.classList.add('big');
+      box.classList.remove('big');
+      box.classList.toggle('dark');
 
       check(3, $("box").className, "card active dark");
 
       // [문제 4] style
       // #msg 의 글자색을 'red' 로, 글자 크기를 '24px' 로 JS 로 바꿔라. (element.style)
       // 여기에 작성
+      const msg = $("msg");
+      msg.style.color = "red"
+      msg.style.fontSize = "24px"
 
       check(
         4,
@@ -88,6 +100,7 @@
       // (createElement, textContent, classList, appendChild 사용)
       const fruitsToAdd = ["kiwi", "melon"];
       // 여기에 작성
+  
 
       check(
         5,
