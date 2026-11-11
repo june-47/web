@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz - Event</title>
+    <link rel="stylesheet" href="quiz.css" />
+    <style>
+      #stage { border: 1px dashed #888; padding: 12px; margin-top: 12px; }
+      #stage > * { margin: 6px 0; }
+      #outer, #cOuter { padding: 10px; background: #eef; }
+      #inner, #cInner { padding: 10px; background: #cce; }
+      #wrap2 { padding: 10px; background: #efe; }
+    </style>
+  </head>
+  <body>
+    <h1>Event 퀴즈</h1>
+    <p>
+      <b>이벤트(Event)</b> 퀴즈입니다. 총 13문제이고, 난이도는 아래로 갈수록 조금씩 올라갑니다.<br />
+      풀이 방법: 각 문제의 <code>// 여기에 작성</code> 아래에 코드를 쓰면 됩니다.
+      그러면 채점 코드가 <b>사람 대신 클릭·입력·키보드 이벤트를 자동으로 발생</b>시키고,
+      위쪽 결과창에 ✅(정답) / ❌(오답과 기대값)이 표시됩니다.<br />
+      규칙: ① <code>check(...)</code> 와 "(수정하지 마세요)" 표시가 있는 코드는 건드리지 않습니다.
+      ② 문제는 위에서 아래로 순서대로 실행되고, 같은 #stage 요소를 계속 사용합니다.
+      ③ 막히면 각 문제의 "힌트"를 먼저 읽어 보세요.
+    </p>
+    <div id="result"></div>
+
+    <section id="stage">
+      <!-- 문제 1 -->
+      <div><button id="btn">+1 버튼</button> 현재 값: <span id="count">0</span></div>
+      <!-- 문제 2 -->
+      <button id="infoBtn"><span id="infoSpan">정보 버튼</span></button>
+      <!-- 문제 3 -->
+      <div><input id="nameInput" type="text" placeholder="이름 입력" /> <p id="preview"></p></div>
+      <!-- 문제 4 -->
+      <ul id="list">
+        <li data-id="a">A</li>
+        <li data-id="b">B</li>
+        <li data-id="c">C</li>
+      </ul>
+      <!-- 문제 5 -->
+      <div><a id="link" href="#">이동 링크</a> <span id="linkMsg"></span></div>
+      <!-- 문제 6 -->
+      <form id="form">
+        <input id="email" name="email" type="text" placeholder="이메일" />
+        <button type="submit">가입</button>
+      </form>
+      <p id="formMsg"></p>
+      <!-- 문제 7 -->
+      <div id="outer">outer<div id="inner">inner<button id="deep">deep</button></div></div>
+      <!-- 문제 8 -->
+      <div id="wrap2">wrap2 <button id="stopBtn">전파 멈춤 버튼</button></div>
+      <!-- 문제 9 -->
+      <div id="cOuter">cOuter<div id="cInner">cInner<button id="cBtn">cBtn</button></div></div>
+      <!-- 문제 10 -->
+      <button id="onceBtn">딱 한 번만</button>
+      <!-- 문제 11 -->
+      <button id="rmBtn">리스너 제거 실험</button>
+      <!-- 문제 12 -->
+      <input id="keyInput" type="text" placeholder="입력 후 Enter" />
+      <!-- 문제 13 -->
+      <div id="customBox">커스텀 이벤트 박스</div>
+    </section>
+
+    <script src="quiz.js"></script>
+    <script>
+      const $ = (id) => document.getElementById(id); // 채점 도우미 (수정하지 마세요)
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 1] 클릭 이벤트 기본 (카운터 만들기)
+      //
+      // ▶ 만들 것: 버튼을 누를 때마다 숫자가 1씩 올라가는 카운터
+      // ▶ 조건
+      //   - #btn 을 클릭하면 #count 의 숫자가 1 증가해야 합니다.
+      //   - HTML 의 onclick 속성이 아니라 addEventListener("click", 함수) 로 만드세요.
+      // ▶ 힌트
+      //   - #count.textContent 는 "0" 같은 "문자열"입니다. Number() 로 숫자로 바꿔서 더하세요.
+      //   - 계산한 결과를 다시 textContent 에 넣으면 화면 숫자가 바뀝니다.
+      // ▶ 기대 결과: 채점 코드가 버튼을 3번 클릭 → #count 의 텍스트가 "3"
+      // 여기에 작성
+
+      $("btn").click();
+      $("btn").click();
+      $("btn").click(); // (수정하지 마세요)
+      check(1, $("count").textContent, "3");
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 2] 이벤트 객체: type / target / currentTarget
+      //
+      // ▶ 만들 것: #infoBtn 이 클릭되었을 때 이벤트 객체에서 정보를 꺼내 아래 변수에 저장
+      //     lastType      : 이벤트 종류 (e.type)
+      //     lastTargetId  : 실제로 클릭된 요소의 id (e.target.id)
+      //     lastCurrentId : 리스너가 붙어 있는 요소의 id (e.currentTarget.id)
+      // ▶ 조건
+      //   - 리스너는 #infoBtn 에 붙이세요. (안쪽 <span id="infoSpan"> 에 붙이면 안 됩니다)
+      //   - 리스너 함수의 첫 번째 매개변수(보통 e)가 이벤트 객체입니다.
+      // ▶ 힌트
+      //   - 버튼 안의 글자(span)를 누르면 target 은 span, currentTarget 은 button 입니다.
+      // ▶ 기대 결과: 채점 코드가 #infoSpan 을 클릭 → ["click", "infoSpan", "infoBtn"]
+      let lastType, lastTargetId, lastCurrentId;
+      // 여기에 작성
+
+      $("infoSpan").click(); // (수정하지 마세요)
+      check(2, [lastType, lastTargetId, lastCurrentId], ["click", "infoSpan", "infoBtn"]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 3] input 이벤트 (실시간 미리보기)
+      //
+      // ▶ 만들 것: 입력창에 글자를 칠 때마다 아래 문단(#preview)이 즉시 바뀌는 기능
+      // ▶ 조건
+      //   - #nameInput 에 "input" 이벤트 리스너를 붙이세요. ("change" 가 아닙니다. change 는 포커스를 잃어야 발생)
+      //   - 입력값이 "June" 이면 #preview 의 텍스트가 "안녕, June!" 이 되어야 합니다.
+      // ▶ 힌트
+      //   - 입력창의 현재 값은 element.value 로 읽습니다.
+      //   - 템플릿 리터럴: `안녕, ${값}!`
+      // ▶ 기대 결과: "June" 입력 → "안녕, June!", 이어서 "Mina" 입력 → "안녕, Mina!"
+      // 여기에 작성
+
+      const typed = [];
+      for (const name of ["June", "Mina"]) {
+        $("nameInput").value = name;
+        $("nameInput").dispatchEvent(new Event("input"));
+        typed.push($("preview").textContent);
+      } // (수정하지 마세요)
+      check(3, typed, ["안녕, June!", "안녕, Mina!"]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 4] 이벤트 위임 (Event Delegation)
+      //
+      // ▶ 만들 것: <ul id="list"> 하나에만 리스너를 붙여서, 어떤 <li> 를 눌렀는지 알아내기
+      // ▶ 조건
+      //   - 리스너는 #list(부모) 에 딱 "하나"만 붙입니다. <li> 마다 붙이면 안 됩니다.
+      //   - 클릭된 <li> 의 data-id 값을 clicked 배열에 push 하세요.
+      //   - <li> 가 아닌 곳(ul 의 빈 영역)을 눌렀을 때는 아무것도 추가하지 않습니다.
+      //   - 나중에 새로 추가된 <li> 도 똑같이 동작해야 합니다. (위임의 장점!)
+      // ▶ 힌트
+      //   - e.target.closest("li") : 클릭된 요소 또는 그 조상 중 가장 가까운 li 를 찾고, 없으면 null
+      //   - data-id 는 li.dataset.id 로 읽습니다.
+      // ▶ 기대 결과: a, c 를 누르고 → ul 빈 곳 클릭(무시) → 새로 만든 d 를 누르면 ["a", "c", "d"]
+      const clicked = [];
+      // 여기에 작성
+
+      const lis = $("list").children;
+      lis[0].click();
+      lis[2].click();
+      $("list").click(); // li 바깥 클릭 → 무시되어야 함
+      const liD = document.createElement("li");
+      liD.dataset.id = "d";
+      liD.textContent = "D";
+      $("list").appendChild(liD);
+      liD.click(); // (수정하지 마세요)
+      check(4, clicked, ["a", "c", "d"]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 5] preventDefault (기본 동작 막기)
+      //
+      // ▶ 만들 것: #link 를 눌러도 링크 이동이 일어나지 않게 막고, 안내 문구 표시
+      // ▶ 조건
+      //   - #link 의 click 리스너에서 기본 동작(링크 이동)을 취소하세요.
+      //   - 그리고 #linkMsg 의 텍스트를 "이동 막음" 으로 바꾸세요.
+      // ▶ 힌트: e.preventDefault()
+      // ▶ 기대 결과: 채점 코드가 클릭 이벤트를 보냄 → 기본 동작이 막혔는지(true) + #linkMsg 가 "이동 막음"
+      // 여기에 작성
+
+      const clickEv = new MouseEvent("click", { bubbles: true, cancelable: true });
+      $("link").dispatchEvent(clickEv); // (수정하지 마세요)
+      check(5, [clickEv.defaultPrevented, $("linkMsg").textContent], [true, "이동 막음"]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 6] form submit 이벤트
+      //
+      // ▶ 만들 것: 가입 폼을 제출했을 때 페이지가 새로고침되지 않고, 결과만 화면에 표시
+      // ▶ 조건
+      //   - #form 에 "submit" 이벤트 리스너를 붙이세요. (버튼 click 이 아니라 form 의 submit!)
+      //   - 새로고침이 일어나지 않도록 기본 동작을 막으세요.
+      //   - #email 의 값을 앞뒤 공백 제거(trim)한 뒤
+      //       값이 있으면  #formMsg 를 "가입: 이메일" 로,
+      //       비어 있으면  #formMsg 를 "이메일을 입력하세요" 로 바꾸세요.
+      // ▶ 힌트: trim() 은 문자열 앞뒤 공백을 제거합니다.
+      // ▶ 기대 결과
+      //   " a@b.com " 제출 → 막힘(true), "가입: a@b.com"
+      //   ""          제출 → 막힘(true), "이메일을 입력하세요"
+      // 여기에 작성
+
+      const submitResults = [];
+      for (const v of [" a@b.com ", ""]) {
+        $("email").value = v;
+        const subEv = new Event("submit", { bubbles: true, cancelable: true });
+        $("form").dispatchEvent(subEv);
+        submitResults.push(subEv.defaultPrevented, $("formMsg").textContent);
+      } // (수정하지 마세요)
+      check(
+        6,
+        submitResults,
+        [true, "가입: a@b.com", true, "이메일을 입력하세요"],
+      );
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 7] 이벤트 버블링 (Bubbling) 순서
+      //
+      // ▶ 만들 것: #outer > #inner > #deep(버튼) 세 요소 각각에 click 리스너를 붙이고,
+      //            클릭되면 자기 이름("outer" / "inner" / "deep")을 order 배열에 push
+      // ▶ 조건: 리스너는 3개 모두 일반 addEventListener("click", ...) 로 만듭니다. (옵션 없음)
+      // ▶ 힌트: 안쪽 버튼을 누르면 이벤트가 "바깥으로" 올라가며 각 요소의 리스너를 차례로 실행합니다.
+      // ▶ 기대 결과: 채점 코드가 #deep 을 한 번 클릭 → order 가 ["deep", "inner", "outer"]
+      const order = [];
+      // 여기에 작성
+
+      $("deep").click(); // (수정하지 마세요)
+      check(7, order, ["deep", "inner", "outer"]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 8] stopPropagation (전파 중단)
+      //
+      // ▶ 만들 것
+      //   (a) #wrap2 를 클릭하면 wrapHits 를 1 증가시키는 리스너
+      //   (b) #stopBtn 을 클릭하면 이벤트가 부모(#wrap2)로 올라가지 못하게 막는 리스너
+      // ▶ 조건: #stopBtn 을 눌렀을 때는 wrapHits 가 늘어나면 안 되고,
+      //         #wrap2 자체를 눌렀을 때만 늘어나야 합니다.
+      // ▶ 힌트: e.stopPropagation()
+      // ▶ 기대 결과: #stopBtn 클릭 후 wrapHits 는 0, 이어서 #wrap2 를 클릭하면 1  →  [0, 1]
+      let wrapHits = 0;
+      // 여기에 작성
+
+      $("stopBtn").click();
+      const afterStop = wrapHits;
+      $("wrap2").click(); // (수정하지 마세요)
+      check(8, [afterStop, wrapHits], [0, 1]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 9] 캡처링 (capture 옵션)
+      //
+      // ▶ 만들 것: #cOuter > #cInner > #cBtn 에 click 리스너를 붙이고
+      //            자기 이름("outer" / "inner" / "btn")을 order2 배열에 push
+      // ▶ 조건: 단, "outer"(#cOuter) 리스너만 캡처링 단계에서 실행되도록 하세요.
+      // ▶ 힌트: addEventListener("click", 함수, { capture: true })  (또는 세 번째 인자 true)
+      // ▶ 기대 결과: #cBtn 클릭 → order2 가 ["outer", "btn", "inner"]
+      //             (캡처링 리스너가 가장 먼저, 그다음 타깃, 마지막으로 버블링)
+      const order2 = [];
+      // 여기에 작성
+
+      $("cBtn").click(); // (수정하지 마세요)
+      check(9, order2, ["outer", "btn", "inner"]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 10] once 옵션
+      //
+      // ▶ 만들 것: #onceBtn 을 여러 번 눌러도 딱 "한 번만" onceCount 가 올라가게 하기
+      // ▶ 조건: if 문이나 플래그 변수를 쓰지 말고, addEventListener 의 옵션만 사용하세요.
+      // ▶ 힌트: addEventListener("click", 함수, { once: true })
+      // ▶ 기대 결과: 채점 코드가 3번 클릭 → onceCount 는 1
+      let onceCount = 0;
+      // 여기에 작성
+
+      $("onceBtn").click();
+      $("onceBtn").click();
+      $("onceBtn").click(); // (수정하지 마세요)
+      check(10, onceCount, 1);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 11] removeEventListener
+      //
+      // ▶ 만들 것
+      //   (a) 이름 있는 함수 onRm : 호출될 때마다 hits 를 1 증가
+      //   (b) #rmBtn 의 click 에 onRm 을 등록
+      //   (c) 이 리스너를 제거하는 함수 stopListening()
+      // ▶ 조건
+      //   - 제거하려면 "등록할 때 쓴 함수와 같은 함수"를 넘겨야 하므로,
+      //     화살표 함수를 바로 넣지 말고 이름 있는 함수(onRm)를 만들어 쓰세요.
+      // ▶ 힌트: removeEventListener("click", onRm)  ← 이벤트 이름과 함수가 등록 때와 똑같아야 제거됩니다.
+      // ▶ 기대 결과: 2번 클릭(hits=2) → stopListening() 호출 → 2번 더 클릭해도 hits 는 그대로 2
+      let hits = 0;
+      // 여기에 작성
+
+      if (typeof stopListening === "function") {
+        $("rmBtn").click();
+        $("rmBtn").click();
+        stopListening();
+        $("rmBtn").click();
+        $("rmBtn").click();
+      } // (수정하지 마세요)
+      check(11, hits, 2);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 12] 키보드 이벤트 (keydown)
+      //
+      // ▶ 만들 것: #keyInput 에서 Enter 를 누르면 입력값을 entered 배열에 저장하고 입력창을 비우기
+      // ▶ 조건
+      //   - "keydown" 이벤트를 사용하고, 눌린 키가 "Enter" 일 때만 동작하세요. (다른 키는 무시)
+      //   - 저장할 때는 앞뒤 공백을 제거(trim)하세요.
+      //   - 저장 후 입력창의 value 를 "" 로 비우세요.
+      // ▶ 힌트: e.key 는 눌린 키의 이름입니다. ("Enter", "a", "Escape" ...)
+      // ▶ 기대 결과
+      //   "  hello  " 입력 후 Enter → entered = ["hello"]
+      //   "x" 입력 후 a 키          → 아무 일도 없음 (입력창엔 "x" 그대로)
+      //   "world" 입력 후 Enter     → entered = ["hello", "world"], 입력창은 ""
+      const entered = [];
+      // 여기에 작성
+
+      const press = (key) =>
+        $("keyInput").dispatchEvent(new KeyboardEvent("keydown", { key }));
+      $("keyInput").value = "  hello  ";
+      press("Enter");
+      $("keyInput").value = "x";
+      press("a");
+      $("keyInput").value = "world";
+      press("Enter"); // (수정하지 마세요)
+      check(12, [entered, $("keyInput").value], [["hello", "world"], ""]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 13] 커스텀 이벤트 (CustomEvent)
+      //
+      // ▶ 만들 것
+      //   (a) #customBox 에 "greet" 이벤트 리스너: 전달받은 이름(e.detail.name)을 greeted 변수에 저장
+      //   (b) shout(name) 함수: #customBox 에 "greet" 커스텀 이벤트를 발생시키고,
+      //       detail 로 { name: name } 객체를 함께 전달
+      // ▶ 힌트
+      //   - 이벤트 만들기 : new CustomEvent("greet", { detail: { name } })
+      //   - 이벤트 발생시키기 : element.dispatchEvent(이벤트)
+      //   - 리스너는 반드시 이벤트를 발생시키기 "전에" 등록되어 있어야 합니다.
+      // ▶ 기대 결과: shout("June") 호출 → greeted 가 "June"
+      let greeted = null;
+      // 여기에 작성
+
+      if (typeof shout === "function") shout("June"); // (수정하지 마세요)
+      check(13, greeted, "June");
+    </script>
+  </body>
+</html>
