@@ -98,13 +98,11 @@ body {
   overflow-x: hidden;
   color: var(--yul-brand-ink);
 }
-
 html.no-scroll,
 body.no-scroll {
   height: 100%;
   overflow: hidden;
 }
-
 body.no-scroll {
   position: fixed;
   left: 0;
@@ -112,7 +110,6 @@ body.no-scroll {
   width: 100%;
   touch-action: none;
 }
-
 .inner {
   width: clamp(1600px, 80vw, 90%);
   margin-inline: auto;
@@ -281,8 +278,7 @@ header.on .ham_menu {
 }
 
 header .container {
-  width: 100%;
-  max-width: 1300px;
+  width: min(1280px, calc(100% - 40px));
   margin: 0 auto;
 }
 
@@ -737,6 +733,8 @@ main .more.border:hover {
   height: 1000px;
   display: flex;
   align-items: center;
+  z-index: 3;
+  position: relative;
 }
 
 .motion .tit b {
@@ -1063,6 +1061,7 @@ main .more.border:hover {
 
 .curriculum {
   padding-top: 64px;
+  padding-bottom: 50px;
   background-color: var(--gray-01);
 }
 
@@ -1133,7 +1132,7 @@ main .more.border:hover {
 }
 
 .contact {
-  padding: 64px 0;
+  padding-bottom: 64px;
   background-color: var(--gray-01);
 }
 
@@ -1231,6 +1230,7 @@ footer .f_top .logo_box {
   flex-direction: column;
   gap: 40px;
 }
+
 footer .f_top .logo_box .logo {
   font-size: 2.3rem;
   font-family: var(--font-Eng2);
@@ -1238,6 +1238,7 @@ footer .f_top .logo_box .logo {
   letter-spacing: 2px;
   opacity: 0.5;
 }
+
 footer .f_top .logo_box .logo_b {
   display: flex;
   gap: 50px;
@@ -1252,13 +1253,13 @@ footer .f_top .btn_box {
 }
 
 footer .f_top .btn_box a,
-footer .f_top .btn_box button {
+footer .f_top button {
   background: #1a1a1a;
   transition: 0.2s;
 }
 
 footer .f_top .btn_box a:hover,
-footer .f_top .btn_box button:hover {
+footer .f_top button:hover {
   background: var(--yul-brand-navy);
 }
 
@@ -1266,6 +1267,7 @@ footer .f_top .btn_box button:hover {
   display: flex;
   gap: 10px;
 }
+
 .sns a {
   width: 60px;
   height: 60px;
@@ -1274,7 +1276,6 @@ footer .f_top .btn_box button:hover {
   align-items: center;
   border-radius: 16px;
 }
-
 .select_box {
   width: 240px;
   height: 100%;
@@ -1299,12 +1300,10 @@ footer .f_top .btn_box button:hover {
   border-radius: 16px;
   overflow: hidden;
 }
-
 .select_box.on button img {
   display: block;
   transform: rotate(180deg);
 }
-
 .select_box ul {
   position: absolute;
   left: 0;
@@ -1315,27 +1314,20 @@ footer .f_top .btn_box button:hover {
   display: flex;
   flex-direction: column;
   color: #7a7a7a;
-  /* [수정] 펼친 목록이 뒤 내용과 겹쳐 보이지 않게 배경 추가 */
-  background: #1a1a1a;
-  border-radius: 16px;
   opacity: 0;
   transition: 0.1s;
 }
-
 .select_box.on ul {
   bottom: 60px;
   opacity: 1;
 }
-
 .select_box ul li {
   flex: 1;
 }
-
 .select_box ul li:nth-child(2) {
   border-top: 1px solid #2a2a2a;
   border-bottom: 1px solid #2a2a2a;
 }
-
 .select_box ul li a {
   display: flex;
   width: 100%;
@@ -1343,7 +1335,6 @@ footer .f_top .btn_box button:hover {
   justify-content: center;
   align-items: center;
 }
-
 .top a {
   width: 100px;
   height: 100%;
@@ -1353,23 +1344,20 @@ footer .f_top .btn_box button:hover {
   border-radius: 16px;
   padding: 0 20px;
 }
-
 footer .f_bottom {
   margin-top: 80px;
   display: flex;
   justify-content: space-between;
   color: var(--gray-07);
-  lighting-color: 1.6;
+  line-height: 1.6;
   letter-spacing: -0.5px;
   font-size: 16px;
-  /* background: #fff; */
 }
 
 footer .f_bottom strong,
 footer .f_bottom .f_con1 a {
   font-weight: 700;
 }
-
 footer .f_bottom .f_con1 span {
   display: inline-flex;
   padding-inline: 0.8em;
@@ -1377,11 +1365,9 @@ footer .f_bottom .f_con1 span {
   align-items: center;
   border-right: 1px solid var(--gray-07);
 }
-
 footer .f_bottom .f_con1 a {
   padding-left: 0.8em;
 }
-
 footer .f_bottom .copy {
   text-align: right;
 }
