@@ -383,14 +383,14 @@ main .more {
 
 main .more.border {
   background: transparent;
-  color: var(--gray-00);
-  border: 1px solid var(--gray-00);
+  color: var(--yul-brand-ink);
+  border: 1px solid var(--yul-brand-ink);
   transition: 0.3s;
 }
 
 main .more.border:hover {
-  background: var(--gray-00);
-  color: var(--yul-brand-ink);
+  background: var(--yul-brand-ink);
+  color: var(--gray-00);
 }
 
 .main_visual {
@@ -447,7 +447,7 @@ main .more.border:hover {
 }
 
 .sub_txt {
-  color: var(--gray-02);
+  color: var(--yul-brand-ink);
   font-size: 20px;
   line-height: 1;
   font-weight: 600;
@@ -461,7 +461,7 @@ main .more.border:hover {
 }
 
 .txt_area .txt {
-  color: var(--gray-02);
+  color: var(--gray-00);
   font-size: 22px;
   font-weight: 300;
   line-height: 1.3;
@@ -904,6 +904,13 @@ main .more.border:hover {
   width: auto;
   height: 60px;
   display: inline-flex;
+  color: var(--gray-00);
+  border-color: var(--gray-00);
+}
+
+.learning ul li .txt a:hover {
+  background-color: var(--gray-00);
+  color: var(--yul-brand-ink);
 }
 
 .learning ul li::after {
