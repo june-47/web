@@ -6,6 +6,21 @@ document.getElementById("ham_menu").addEventListener("click", function () {
   document.querySelector("html,body").classList.toggle("no-scroll");
 });
 
+document
+  .querySelectorAll("header .container .all_con ul.list>li")
+  .forEach(function (li) {
+    const button = li.querySelector("button");
+
+    //버튼이 없는 항목은 건너뛰기
+    if (!button) return;
+
+    button.addEventListener("click", function () {
+      //css의 미디어쿼리와 동일하게 1160px 이하에서만 실행
+      if (!window.matchMedia("(max-width: 1160px)").matches) return;
+      li.classList.toggle("on");
+    });
+  });
+
 let scrollLockY = 0;
 
 const setScrollLocked = (isLocked) => {
@@ -190,20 +205,18 @@ const blogSlide = new Swiper(".blog .swiper", {
 
 //화면 크기가 바뀌면 카드 너비와 슬라이드 위치가 달라진다.
 //그래서 Swiper에게 "다시 계산해"라고 알려주는 함수
-const updateResponsiveSlides =  () => {
-  [mainSlide, infoSlide, contentsSlide, blogSlide].forEach((slide)=>{
+const updateResponsiveSlides = () => {
+  [mainSlide, infoSlide, contentsSlide, blogSlide].forEach((slide) => {
     slide.update();
-  })
-}
+  });
+};
 
 //리사이즈 중에는 계산을 계속하지 않고, 잠깐 멈춘 뒤 한번만 계산합니다.
 let resizeTimer;
-window.addEventListener('resize',()=> {
+window.addEventListener("resize", () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(updateResponsiveSlides,120);
-})
-
-
+  resizeTimer = setTimeout(updateResponsiveSlides, 120);
+});
 
 document.querySelector(".select_box button").addEventListener("click", () => {
   document.querySelector(".select_box").classList.toggle("on");
