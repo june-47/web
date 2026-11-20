@@ -5,33 +5,57 @@
     <title>JS Quiz - Event</title>
     <link rel="stylesheet" href="quiz.css" />
     <style>
-      #stage { border: 1px dashed #888; padding: 12px; margin-top: 12px; }
-      #stage > * { margin: 6px 0; }
-      #outer, #cOuter { padding: 10px; background: #eef; }
-      #inner, #cInner { padding: 10px; background: #cce; }
-      #wrap2 { padding: 10px; background: #efe; }
+      #stage {
+        border: 1px dashed #888;
+        padding: 12px;
+        margin-top: 12px;
+      }
+      #stage > * {
+        margin: 6px 0;
+      }
+      #outer,
+      #cOuter {
+        padding: 10px;
+        background: #eef;
+      }
+      #inner,
+      #cInner {
+        padding: 10px;
+        background: #cce;
+      }
+      #wrap2 {
+        padding: 10px;
+        background: #efe;
+      }
     </style>
   </head>
   <body>
     <h1>Event 퀴즈</h1>
     <p>
-      <b>이벤트(Event)</b> 퀴즈입니다. 총 13문제이고, 난이도는 아래로 갈수록 조금씩 올라갑니다.<br />
-      풀이 방법: 각 문제의 <code>// 여기에 작성</code> 아래에 코드를 쓰면 됩니다.
-      그러면 채점 코드가 <b>사람 대신 클릭·입력·키보드 이벤트를 자동으로 발생</b>시키고,
-      위쪽 결과창에 ✅(정답) / ❌(오답과 기대값)이 표시됩니다.<br />
-      규칙: ① <code>check(...)</code> 와 "(수정하지 마세요)" 표시가 있는 코드는 건드리지 않습니다.
-      ② 문제는 위에서 아래로 순서대로 실행되고, 같은 #stage 요소를 계속 사용합니다.
-      ③ 막히면 각 문제의 "힌트"를 먼저 읽어 보세요.
+      <b>이벤트(Event)</b> 퀴즈입니다. 총 13문제이고, 난이도는 아래로 갈수록
+      조금씩 올라갑니다.<br />
+      풀이 방법: 각 문제의 <code>// 여기에 작성</code> 아래에 코드를 쓰면
+      됩니다. 그러면 채점 코드가
+      <b>사람 대신 클릭·입력·키보드 이벤트를 자동으로 발생</b>시키고, 위쪽
+      결과창에 ✅(정답) / ❌(오답과 기대값)이 표시됩니다.<br />
+      규칙: ① <code>check(...)</code> 와 "(수정하지 마세요)" 표시가 있는 코드는
+      건드리지 않습니다. ② 문제는 위에서 아래로 순서대로 실행되고, 같은 #stage
+      요소를 계속 사용합니다. ③ 막히면 각 문제의 "힌트"를 먼저 읽어 보세요.
     </p>
     <div id="result"></div>
 
     <section id="stage">
       <!-- 문제 1 -->
-      <div><button id="btn">+1 버튼</button> 현재 값: <span id="count">0</span></div>
+      <div>
+        <button id="btn">+1 버튼</button> 현재 값: <span id="count">0</span>
+      </div>
       <!-- 문제 2 -->
       <button id="infoBtn"><span id="infoSpan">정보 버튼</span></button>
       <!-- 문제 3 -->
-      <div><input id="nameInput" type="text" placeholder="이름 입력" /> <p id="preview"></p></div>
+      <div>
+        <input id="nameInput" type="text" placeholder="이름 입력" />
+        <p id="preview"></p>
+      </div>
       <!-- 문제 4 -->
       <ul id="list">
         <li data-id="a">A</li>
@@ -47,11 +71,17 @@
       </form>
       <p id="formMsg"></p>
       <!-- 문제 7 -->
-      <div id="outer">outer<div id="inner">inner<button id="deep">deep</button></div></div>
+      <div id="outer">
+        outer
+        <div id="inner">inner<button id="deep">deep</button></div>
+      </div>
       <!-- 문제 8 -->
       <div id="wrap2">wrap2 <button id="stopBtn">전파 멈춤 버튼</button></div>
       <!-- 문제 9 -->
-      <div id="cOuter">cOuter<div id="cInner">cInner<button id="cBtn">cBtn</button></div></div>
+      <div id="cOuter">
+        cOuter
+        <div id="cInner">cInner<button id="cBtn">cBtn</button></div>
+      </div>
       <!-- 문제 10 -->
       <button id="onceBtn">딱 한 번만</button>
       <!-- 문제 11 -->
@@ -78,10 +108,10 @@
       //   - 계산한 결과를 다시 textContent 에 넣으면 화면 숫자가 바뀝니다.
       // ▶ 기대 결과: 채점 코드가 버튼을 3번 클릭 → #count 의 텍스트가 "3"
       // 여기에 작성
-      document.getElementById('btn').addEventListener('click', ()=> {
-         
-      })
-
+      document.getElementById("btn").addEventListener("click", function () {
+        const now = Number($("count").textContent);
+        $("count").textContent = now + 1;
+      });
 
       $("btn").click();
       $("btn").click();
@@ -103,9 +133,18 @@
       // ▶ 기대 결과: 채점 코드가 #infoSpan 을 클릭 → ["click", "infoSpan", "infoBtn"]
       let lastType, lastTargetId, lastCurrentId;
       // 여기에 작성
+      $('infoBtn').addEventListener('click', function(e) {
+        lastType = e.type;
+        lastTargetId = e.target.id;
+        lastCurrentId = e.currentTarget.id;
+      })
 
       $("infoSpan").click(); // (수정하지 마세요)
-      check(2, [lastType, lastTargetId, lastCurrentId], ["click", "infoSpan", "infoBtn"]);
+      check(
+        2,
+        [lastType, lastTargetId, lastCurrentId],
+        ["click", "infoSpan", "infoBtn"],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 3] input 이벤트 (실시간 미리보기)
@@ -120,6 +159,8 @@
       // ▶ 기대 결과: "June" 입력 → "안녕, June!", 이어서 "Mina" 입력 → "안녕, Mina!"
       // 여기에 작성
 
+
+      
       const typed = [];
       for (const name of ["June", "Mina"]) {
         $("nameInput").value = name;
@@ -166,9 +207,16 @@
       // ▶ 기대 결과: 채점 코드가 클릭 이벤트를 보냄 → 기본 동작이 막혔는지(true) + #linkMsg 가 "이동 막음"
       // 여기에 작성
 
-      const clickEv = new MouseEvent("click", { bubbles: true, cancelable: true });
+      const clickEv = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+      });
       $("link").dispatchEvent(clickEv); // (수정하지 마세요)
-      check(5, [clickEv.defaultPrevented, $("linkMsg").textContent], [true, "이동 막음"]);
+      check(
+        5,
+        [clickEv.defaultPrevented, $("linkMsg").textContent],
+        [true, "이동 막음"],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 6] form submit 이벤트
@@ -193,11 +241,12 @@
         $("form").dispatchEvent(subEv);
         submitResults.push(subEv.defaultPrevented, $("formMsg").textContent);
       } // (수정하지 마세요)
-      check(
-        6,
-        submitResults,
-        [true, "가입: a@b.com", true, "이메일을 입력하세요"],
-      );
+      check(6, submitResults, [
+        true,
+        "가입: a@b.com",
+        true,
+        "이메일을 입력하세요",
+      ]);
 
       // ─────────────────────────────────────────────────────────
       // [문제 7] 이벤트 버블링 (Bubbling) 순서
