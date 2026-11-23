@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   //처음 페이지가 열렸을 때도 현재 섹션 메뉴를 표시한다
-  updateActiveFromViewport();
+  updateActiveFromViewport('#hero');
 
   gsap
     .timeline({ default: { duration: 0.8, ease: "power2.out" } })
