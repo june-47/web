@@ -52,10 +52,7 @@
       <!-- 문제 2 -->
       <button id="infoBtn"><span id="infoSpan">정보 버튼</span></button>
       <!-- 문제 3 -->
-      <div>
-        <input id="nameInput" type="text" placeholder="이름 입력" />
-        <p id="preview"></p>
-      </div>
+
       <!-- 문제 4 -->
       <ul id="list">
         <li data-id="a">A</li>
@@ -133,11 +130,11 @@
       // ▶ 기대 결과: 채점 코드가 #infoSpan 을 클릭 → ["click", "infoSpan", "infoBtn"]
       let lastType, lastTargetId, lastCurrentId;
       // 여기에 작성
-      $('infoBtn').addEventListener('click', function(e) {
+      $("infoBtn").addEventListener("click", function (e) {
         lastType = e.type;
         lastTargetId = e.target.id;
         lastCurrentId = e.currentTarget.id;
-      })
+      });
 
       $("infoSpan").click(); // (수정하지 마세요)
       check(
@@ -158,9 +155,14 @@
       //   - 템플릿 리터럴: `안녕, ${값}!`
       // ▶ 기대 결과: "June" 입력 → "안녕, June!", 이어서 "Mina" 입력 → "안녕, Mina!"
       // 여기에 작성
-
+      <div>
+        <input id="nameInput" type="text" placeholder="이름 입력" />
+        <p id="preview"></p>
+      </div>;
 
       
+
+
       const typed = [];
       for (const name of ["June", "Mina"]) {
         $("nameInput").value = name;
