@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Quiz - Cosmetic</title>
+    <link rel="stylesheet" href="quiz.css" />
+    <style>
+      /* ───── 퀴즈 화면용 스타일 (수정하지 마세요) ───── */
+      :root {
+        --main-pink: #fd79a8;
+        --main-rpink: #ff7675;
+        --main-yellow-l: #ffeaa7;
+        --w-color: #fff;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 380px;
+        gap: 16px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+      #result {
+        position: sticky;
+        top: 16px;
+        max-height: calc(100vh - 32px);
+        overflow: auto;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 13px;
+        background: #fafafa;
+      }
+      #result::before {
+        content: "채점 결과";
+        display: block;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      #stage {
+        border: 1px dashed #888;
+        padding: 12px;
+      }
+      #stage * {
+        box-sizing: border-box;
+      }
+      #stage ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      #stage h3.label {
+        margin: 20px 0 6px;
+        font-size: 13px;
+        color: #666;
+      }
+      #stage h3.label:first-child {
+        margin-top: 0;
+      }
+
+      /* ───── 07cosmetic 을 줄여 놓은 스타일 (수정하지 마세요) ───── */
+      header {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        background: #2d2d2d;
+        border-radius: 8px;
+      }
+      header .inner {
+        position: relative;
+        z-index: 2;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        color: #fff;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+      header.on h1,
+      header.on .lang {
+        visibility: hidden;
+      }
+      header .lang {
+        margin-left: auto;
+        margin-right: 16px;
+      }
+      header .lang ul {
+        display: flex;
+        gap: 8px;
+        font-size: 12px;
+      }
+      header .lang li {
+        padding-right: 8px;
+        border-right: 1px solid #fff;
+      }
+      header .lang a {
+        color: #fff;
+        text-decoration: none;
+      }
+      .ham {
+        width: 32px;
+        height: 32px;
+        position: relative;
+        cursor: pointer;
+      }
+      .ham ul {
+        position: absolute;
+        inset: 9px 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .ham li {
+        height: 2px;
+        background: #fff;
+      }
+      header .fix {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        transition: right 0.6s;
+      }
+      header .fix .img_box {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url(../../clonecoding/07cosmetic/asset/img/fix_imgbox.jpg)
+          center/cover;
+        color: var(--main-yellow-l);
+        font-size: 22px;
+      }
+      header .fix .gnb {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding-left: 24px;
+      }
+      header .fix .gnb ul {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      header .fix .gnb li {
+        transform: translateY(30px);
+        opacity: 0;
+        transition: 0.6s;
+      }
+      header.on .fix .gnb li {
+        transform: none;
+        opacity: 1;
+      }
+      header .fix .gnb a {
+        color: #fff;
+        font-size: 20px;
+        text-decoration: none;
+      }
+      header.sc .inner {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(6px);
+      }
+
+      .products {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .products li {
+        flex: 1;
+        height: 140px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #ddd;
+      }
+      .products a {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        color: #000;
+        font-size: 12px;
+        text-decoration: none;
+      }
+
+      a.more {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        color: #333;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      a.more .plus {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #333;
+        border-radius: 50%;
+        position: relative;
+      }
+      a.more .plus::before {
+        content: "";
+        width: 2px;
+        height: 16px;
+        background: #333;
+      }
+      a.more .plus::after {
+        content: "";
+        width: 16px;
+        height: 2px;
+        background: #333;
+      }
+
+      .sns {
+        display: flex;
+        gap: 10px;
+      }
+      .sns li {
+        width: 80px;
+        height: 80px;
+        flex: none;
+        background: #eee;
+      }
+      .sns a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cosmetic 퀴즈</h1>
+    <p>
+      <b>07cosmetic</b> 클론코딩 내용을 다루는 퀴즈입니다. 총 14문제이고 JS 와
+      CSS 문제가 섞여 있습니다.<br />
+      <b>새로운 점 ①</b>: 각 문제 주석에 <b>"▶ 대상 HTML"</b>과
+      <b>"▶ 이미 적용된 CSS"</b>를 같이 적어 두었습니다. 위로 올라가서 HTML 을
+      찾지 않아도 됩니다.<br />
+      <b>새로운 점 ②</b>: CSS 문제도 문제 바로 아래에서 풉니다.
+      <code>css(`...`)</code> 의 백틱(`) 안에 CSS 를 평소처럼 쓰면 페이지에
+      적용됩니다.<br />
+      <b>새로운 점 ③</b>: 채점 결과는 화면 오른쪽에 따라다닙니다.<br />
+      규칙: ① <code>check(...)</code> 와 "(수정하지 마세요)" 코드는 건드리지
+      않습니다. ② 위에서부터 <b>순서대로</b> 푸세요. (문제 10 에서 만든
+      SNS 목록을 문제 11 에서 씁니다.) ③ 문법 오류가 나면 그 아래 문제는 채점이
+      안 되니 F12 콘솔을 확인하세요.
+    </p>
+
+    <div class="layout">
+      <section id="stage">
+        <h3 class="label">header (문제 1~5, 12~14) — 오른쪽 ≡ 버튼이 .ham</h3>
+        <header>
+          <div class="fix">
+            <div class="img_box"><em>FlowYulLab</em></div>
+            <div class="gnb">
+              <ul>
+                <li><a href="#brand">Brand</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#oem">OEM/ODM</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- //.fix -->
+          <div class="inner">
+            <h1>FlowYulLab</h1>
+            <div class="lang">
+              <ul>
+                <li><a href="#">KOR</a></li>
+                <li><a href="#">ENG</a></li>
+                <li><a href="#">JPN</a></li>
+              </ul>
+            </div>
+            <div class="ham">
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+          <!-- //.inner -->
+        </header>
+
+        <h3 class="label">.products (문제 6~8)</h3>
+        <ul class="products">
+          <li data-aos="flip-left" data-aos-delay="50">
+            <a href="#">
+              <strong>Cherie by Yul</strong>
+              <span>레이디언스 세럼</span>
+              <em>96,000 won</em>
+            </a>
+          </li>
+          <li data-aos="flip-right" data-aos-delay="100">
+            <a href="#">
+              <strong>Cherie by Yul</strong>
+              <span>수분 크림</span>
+              <em>54,000 won</em>
+            </a>
+          </li>
+          <li data-aos="flip-left" data-aos-delay="150">
+            <a href="#">
+              <strong>Cherie by Yul</strong>
+              <span>클렌징 폼</span>
+              <em>28,000 won</em>
+            </a>
+          </li>
+          <li data-aos="flip-right" data-aos-delay="200">
+            <a href="#">
+              <strong>Cherie by Yul</strong>
+              <span>선 에센스</span>
+              <em>39,000 won</em>
+            </a>
+          </li>
+        </ul>
+
+        <h3 class="label">a.more (문제 9)</h3>
+        <a href="#" class="more">
+          <div class="plus"></div>
+          BRAND STORY
+        </a>
+
+        <h3 class="label">.sns (문제 10, 11) — 처음엔 비어 있음</h3>
+        <ul class="sns"></ul>
+      </section>
+
+      <div id="result"></div>
+    </div>
+
+    <script src="quiz.js"></script>
+    <script>
+      // ── 채점 도우미 (수정하지 마세요) ──
+      // css(`CSS 코드`) : 백틱 안의 CSS 를 <style> 로 만들어 페이지에 적용합니다.
+      const css = (text) => {
+        const style = document.createElement("style");
+        style.textContent = text;
+        document.head.appendChild(style);
+      };
+      // IMG : 07cosmetic 이미지 폴더 경로. css(`...`) 안에서 ${IMG} 로 쓸 수 있습니다.
+      const IMG = "../../clonecoding/07cosmetic/asset/img/";
+      // cs(요소, 의사요소) : getComputedStyle 줄임말 (최종 적용된 스타일 읽기)
+      const cs = (el, pseudo) => getComputedStyle(el, pseudo);
+      // menuState() : [header 에 on 이 있는지, body 에 lock 이 있는지]
+      const menuState = () => [
+        document.querySelector("header").classList.contains("on"),
+        document.body.classList.contains("lock"),
+      ];
+      const fakeClick = (el) =>
+        el.dispatchEvent(
+          new MouseEvent("click", { bubbles: true, cancelable: true }),
+        );
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 1] [CSS] CSS 변수 var() 쓰기
+      //
+      // ▶ 대상 HTML
+      //   <header>
+      //     <div class="fix">
+      //       <div class="img_box"><em>FlowYulLab</em></div>
+      //       <div class="gnb"> <ul> <li><a>Brand</a></li> ... </ul> </div>
+      //     </div>
+      //   </header>
+      // ▶ 이미 적용된 CSS
+      //   :root { --main-rpink: #ff7675; --w-color: #fff; ... }
+      // ▶ 만들 것: header .fix .gnb 의
+      //   - 배경색을 변수 --main-rpink 로
+      //   - 글자색을 변수 --w-color 로
+      // ▶ 힌트
+      //   - 변수 꺼내 쓰기: var(--변수이름)
+      //   - 색 코드를 직접 쓰지 말고 꼭 var() 로 쓰세요. (색을 바꿀 때 :root 한 곳만 고치면 되는 게 장점)
+      //   - 채점은 브라우저가 계산한 rgb 값으로 합니다.
+      // ▶ 기대 결과: ["rgb(255, 118, 117)", "rgb(255, 255, 255)"]
+      css(`
+        /* 여기에 작성 */
+
+      `);
+
+      const gnb = document.querySelector("header .fix .gnb"); // (수정하지 마세요)
+      check(1, [cs(gnb).backgroundColor, cs(gnb).color], [
+        "rgb(255, 118, 117)",
+        "rgb(255, 255, 255)",
+      ]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 2] [CSS] :last-child 로 마지막 구분선 없애기
+      //
+      // ▶ 대상 HTML
+      //   <div class="lang">
+      //     <ul>
+      //       <li><a href="#">KOR</a></li>
+      //       <li><a href="#">ENG</a></li>
+      //       <li><a href="#">JPN</a></li>
+      //     </ul>
+      //   </div>
+      // ▶ 이미 적용된 CSS
+      //   header .lang li { padding-right: 8px; border-right: 1px solid #fff; }
+      //   → 지금은 "KOR | ENG | JPN |" 처럼 JPN 뒤에도 선이 있습니다.
+      // ▶ 만들 것: 마지막 li 의 오른쪽 테두리만 없애기
+      // ▶ 힌트
+      //   - 선택자 뒤에 :last-child
+      //   - border-right: 0;  (테두리 굵기 0 → 선 스타일도 none 이 됩니다)
+      // ▶ 기대 결과: 각 li 의 테두리 스타일 → ["solid", "solid", "none"]
+      css(`
+        /* 여기에 작성 */
+
+      `);
+
+      check(
+        2,
+        [...document.querySelectorAll("header .lang li")].map(
+          (li) => cs(li).borderRightStyle,
+        ),
+        ["solid", "solid", "none"],
+      ); // (수정하지 마세요)
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 3] [JS] 햄버거 버튼 : classList.toggle
+      //
+      // ▶ 대상 HTML
+      //   <header>
+      //     ...
+      //     <div class="inner">
+      //       ...
+      //       <div class="ham"> <ul> <li></li><li></li><li></li> </ul> </div>
+      //     </div>
+      //   </header>
+      // ▶ 만들 것: .ham 을 클릭할 때마다
+      //   - header 에 클래스 on 을 붙였다 뗐다 (toggle)
+      //   - body 에도 클래스 lock 을 붙였다 뗐다 (toggle)
+      // ▶ 힌트
+      //   - 요소.classList.toggle("이름") : 있으면 지우고, 없으면 붙입니다.
+      //   - 07cosmetic 의 common.js 와 똑같은 내용입니다. 안 보고 써 보세요!
+      //   - body 는 document.body 로 바로 가져올 수 있습니다.
+      //   - (lock 은 실제 사이트에서 메뉴가 열렸을 때 뒤 페이지 스크롤을 막는 용도. 여기서는 스타일 없이 클래스만 확인합니다.)
+      // ▶ 기대 결과: 한 번 클릭 [true, true], 두 번 클릭 [false, false]
+      //   ※ 문제 4 를 풀면 화면의 ≡ 버튼을 눌러 메뉴가 열리는 걸 직접 볼 수 있습니다.
+      // 여기에 작성
+
+      const $ham = document.querySelector(".ham"); // (수정하지 마세요)
+      fakeClick($ham);
+      const s3a = menuState();
+      fakeClick($ham);
+      check(3, [s3a, menuState()], [
+        [true, true],
+        [false, false],
+      ]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 4] [CSS] 화면 밖에 숨긴 메뉴 꺼내기 + 선택자 우선순위
+      //
+      // ▶ 대상 HTML
+      //   <header>            ← 문제 3 에서 여기에 on 이 붙었다 떨어집니다
+      //     <div class="fix"> ... </div>
+      //     ...
+      //   </header>
+      // ▶ 이미 적용된 CSS
+      //   header { position: relative; overflow: hidden; }
+      //   header .fix { position: absolute; top: 0; right: -100%; width: 100%; transition: right 0.6s; }
+      //   → right: -100% 라서 .fix 가 header 오른쪽 바깥에 숨어 있습니다.
+      // ▶ 만들 것: header 에 on 이 붙으면 .fix 의 right 가 0 이 되게 하기
+      // ▶ 힌트
+      //   - "on 이 붙은 header 안의 .fix" → header.on .fix   (header 와 .on 사이 띄어쓰기 없음!)
+      //   - 함정: header .on .fix (띄어쓰기 있음) 은 "header 안에 있는 .on 안의 .fix" 라는 뜻이라 안 맞습니다.
+      //     붙여 쓰면 "같은 요소", 띄어 쓰면 "그 안쪽 요소" 입니다.
+      //   - 새 규칙이 이기는 이유: header.on .fix (태그1 + 클래스2) 가 header .fix (태그1 + 클래스1) 보다 우선순위가 높기 때문.
+      // ▶ 기대 결과: [on 없을 때 right 가 음수인지, on 있을 때 right] → [true, "0px"]
+      css(`
+        /* 여기에 작성 */
+
+      `);
+
+      // 채점 중에는 transition 을 잠깐 끕니다 (수정하지 마세요)
+      const $header = document.querySelector("header");
+      const $fix = document.querySelector("header .fix");
+      $fix.style.transition = "none";
+      const offRight = parseFloat(cs($fix).right) < 0;
+      $header.classList.add("on");
+      const onRight = cs($fix).right;
+      $header.classList.remove("on");
+      cs($fix).right;
+      $fix.style.transition = "";
+      check(4, [offRight, onRight], [true, "0px"]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 5] [JS] forEach 의 index 로 순서대로 딜레이 주기
+      //
+      // ▶ 대상 HTML
+      //   <div class="gnb">
+      //     <ul>
+      //       <li><a href="#brand">Brand</a></li>
+      //       <li><a href="#products">Products</a></li>
+      //       <li><a href="#oem">OEM/ODM</a></li>
+      //       <li><a href="#contact">Contact</a></li>
+      //     </ul>
+      //   </div>
+      // ▶ 이미 적용된 CSS
+      //   header .fix .gnb li     { transform: translateY(30px); opacity: 0; transition: 0.6s; }
+      //   header.on .fix .gnb li  { transform: none; opacity: 1; }
+      // ▶ 만들 것: gnb 의 li 들에 transition-delay 를 0.2s, 0.4s, 0.6s, 0.8s 순서로 주기
+      // ▶ 힌트
+      //   - document.querySelectorAll("header .fix .gnb > ul > li")
+      //   - NodeList.forEach((li, index) => { ... })  → index 는 0, 1, 2, 3
+      //   - JS 로 스타일 넣기: li.style.transitionDelay = "0.2s"   (CSS 의 - 대신 카멜표기)
+      //   - 템플릿 문자열: `${숫자}s`
+      //   - 참고: 0.2 * 3 은 JS 에서 0.6000000000000001 이 됩니다. (소수 계산 오차)
+      //     채점에서는 소수 첫째 자리로 반올림해서 비교하니 걱정하지 마세요.
+      // ▶ 기대 결과: [0.2, 0.4, 0.6, 0.8]
+      //   ※ 다 풀고 ≡ 버튼을 누르면 메뉴 글자가 하나씩 차례로 올라옵니다.
+      // 여기에 작성
+
+      check(
+        5,
+        [...document.querySelectorAll("header .fix .gnb > ul > li")].map(
+          (li) => Math.round(parseFloat(li.style.transitionDelay) * 10) / 10,
+        ),
+        [0.2, 0.4, 0.6, 0.8],
+      ); // (수정하지 마세요)
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 6] [JS] data-aos-* 속성 읽기 : dataset 과 카멜표기
+      //
+      // ▶ 대상 HTML
+      //   <ul class="products">
+      //     <li data-aos="flip-left"  data-aos-delay="50">  ... </li>
+      //     <li data-aos="flip-right" data-aos-delay="100"> ... </li>
+      //     <li data-aos="flip-left"  data-aos-delay="150"> ... </li>
+      //     <li data-aos="flip-right" data-aos-delay="200"> ... </li>
+      //   </ul>
+      // ▶ 만들 것
+      //   (a) 각 li 의 data-aos 값을 aosNames 배열에
+      //   (b) 각 li 의 data-aos-delay 값을 "숫자로" aosDelays 배열에
+      // ▶ 힌트
+      //   - data-aos        → li.dataset.aos
+      //   - data-aos-delay  → li.dataset.???   (data- 를 떼고, - 뒤 글자를 대문자로)
+      //   - dataset 값은 항상 문자열입니다. Number() 로 바꾸세요.
+      //   - 배열로 받고 싶으면 [...NodeList].map(...) 도 좋고, forEach + push 도 좋습니다.
+      // ▶ 기대 결과: [["flip-left", "flip-right", "flip-left", "flip-right"], [50, 100, 150, 200]]
+      let aosNames, aosDelays;
+      // 여기에 작성
+
+      check(6, [aosNames, aosDelays], [
+        ["flip-left", "flip-right", "flip-left", "flip-right"],
+        [50, 100, 150, 200],
+      ]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 7] [CSS] :nth-child(2n) 으로 지그재그 배치
+      //
+      // ▶ 대상 HTML
+      //   <ul class="products">
+      //     <li>...</li>  <li>...</li>  <li>...</li>  <li>...</li>
+      //   </ul>
+      // ▶ 이미 적용된 CSS
+      //   .products    { display: flex; gap: 12px; align-items: flex-start; }
+      //   .products li { flex: 1; height: 140px; border-radius: 16px; background: #ddd; }
+      // ▶ 만들 것: 짝수 번째 li 만 위쪽 바깥 여백(margin-top) 40px
+      // ▶ 힌트
+      //   - :nth-child(2n)  → 2, 4, 6 ... 번째   (2n+1 은 홀수 번째)
+      //   - 원본 main_style.css 의 .best_product .right_box ul li:nth-child(2n) 과 같은 아이디어입니다.
+      // ▶ 기대 결과: ["0px", "40px", "0px", "40px"]
+      css(`
+        /* 여기에 작성 */
+
+      `);
+
+      const productLis = document.querySelectorAll(".products li"); // (수정하지 마세요)
+      check(
+        7,
+        [...productLis].map((li) => cs(li).marginTop),
+        ["0px", "40px", "0px", "40px"],
+      );
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 8] [CSS] 배경 이미지 : background 단축 속성 vs background-image
+      //
+      // ▶ 대상 HTML: 문제 7 과 같은 .products li 4개
+      // ▶ 사용할 에셋: product01.jpg ~ product04.jpg  (경로는 ${IMG} 로 쓰면 됩니다)
+      // ▶ 만들 것
+      //   (a) .products li 전체 : 배경을 product01.jpg, 가운데(center), 꽉 채우기(cover)
+      //   (b) 2, 3, 4 번째 li  : 배경 "이미지만" product02, 03, 04 로 바꾸기
+      // ▶ 힌트
+      //   - 단축 속성: background: url(${IMG}product01.jpg) center/cover;
+      //       (center 는 위치, / 뒤의 cover 는 크기)
+      //   - 함정: (b) 에서도 background: url(...) 로 쓰면 크기(cover)가 기본값으로 초기화됩니다!
+      //       → 단축 속성은 안 적은 값까지 전부 다시 덮어쓰기 때문.
+      //       → 이미지만 바꿀 땐 background-image 를 쓰세요. (원본 main_style.css 도 그렇게 했습니다)
+      //   - css(`...`) 는 백틱 문자열이라 안에서 ${IMG} 가 그대로 경로로 바뀝니다.
+      // ▶ 기대 결과: [파일명 4개, 각 li 의 background-size]
+      //   → [["product01.jpg", "product02.jpg", "product03.jpg", "product04.jpg"], ["cover", "cover", "cover", "cover"]]
+      css(`
+        /* 여기에 작성 */
+
+      `);
+
+      const fileName = (bg) => (bg.match(/([^/"]+)"?\)$/) || [])[1] || bg; // (수정하지 마세요)
+      check(
+        8,
+        [
+          [...productLis].map((li) => fileName(cs(li).backgroundImage)),
+          [...productLis].map((li) => cs(li).backgroundSize),
+        ],
+        [
+          ["product01.jpg", "product02.jpg", "product03.jpg", "product04.jpg"],
+          ["cover", "cover", "cover", "cover"],
+        ],
+      );
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 9] [CSS] ::before / ::after 로 + 아이콘 만들기 (가운데 정렬)
+      //
+      // ▶ 대상 HTML
+      //   <a href="#" class="more">
+      //     <div class="plus"></div>
+      //     BRAND STORY
+      //   </a>
+      // ▶ 이미 적용된 CSS
+      //   a.more .plus         { width: 40px; height: 40px; border: 2px solid #333; border-radius: 50%; position: relative; }
+      //   a.more .plus::before { content: ""; width: 2px;  height: 16px; background: #333; }   ← 세로 막대
+      //   a.more .plus::after  { content: ""; width: 16px; height: 2px;  background: #333; }   ← 가로 막대
+      //   → 지금은 막대가 안 보입니다. (위치가 안 잡힌 인라인 요소라 width/height 가 안 먹음)
+      // ▶ 만들 것: ::before 와 ::after 둘 다 동그라미 "정가운데"에 오게 하기
+      // ▶ 힌트
+      //   - 가운데 정렬 공식: position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      //       left/top 50% → 막대의 "왼쪽 위 모서리"가 가운데로 감
+      //       translate(-50%, -50%) → 막대 "자기 크기"의 절반만큼 되돌아와서 진짜 가운데
+      //   - 부모(.plus)에 position: relative 는 이미 있습니다.
+      //   - 똑같은 내용을 두 번 쓰지 말고 쉼표(,)로 선택자를 묶어 보세요.
+      //       a.more .plus::before, a.more .plus::after { ... }
+      // ▶ 기대 결과: 각 막대의 [position, 가로세로 정가운데인지, transform 계산값]
+      //   → [["absolute", true, "matrix(1, 0, 0, 1, -1, -8)"], ["absolute", true, "matrix(1, 0, 0, 1, -8, -1)"]]
+      //   (matrix 의 마지막 두 숫자 = 왼쪽으로 -1px, 위로 -8px 이동. 즉 자기 크기의 절반)
+      css(`
+        /* 여기에 작성 */
+
+      `);
+
+      const $plus = document.querySelector("a.more .plus"); // (수정하지 마세요)
+      const barInfo = (pseudo) => {
+        const s = cs($plus, pseudo);
+        const half = `${$plus.clientWidth / 2}px`;
+        return [s.position, s.left === half && s.top === half, s.transform];
+      };
+      check(9, [barInfo("::before"), barInfo("::after")], [
+        ["absolute", true, "matrix(1, 0, 0, 1, -1, -8)"],
+        ["absolute", true, "matrix(1, 0, 0, 1, -8, -1)"],
+      ]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 10] [JS] 배열로 인스타그램 목록 만들기 : map + 템플릿 문자열 + join
+      //
+      // ▶ 대상 HTML
+      //   <ul class="sns"></ul>      ← 지금은 비어 있습니다
+      // ▶ 사용할 에셋: snsFiles 배열 (sns1.jpg ~ sns5.jpg)
+      // ▶ 만들 것: .sns 안에 아래 모양의 li 를 사진 개수만큼 넣기
+      //   <li><a href="#"><img src="이미지경로" alt="instagram 번호" /></a></li>
+      //     - 이미지경로 : IMG + 파일명
+      //     - 번호       : 1 부터 시작 (instagram 1, instagram 2, ...)
+      // ▶ 힌트
+      //   - snsFiles.map((file, i) => `<li>...${IMG + file}...${i + 1}...</li>`)
+      //       → 문자열 배열이 됩니다.
+      //   - 배열.join("")  → 문자열 하나로 합치기 (join() 만 쓰면 사이에 쉼표가 들어갑니다!)
+      //   - 요소.innerHTML = 합친문자열
+      //   - 원본 index.html 에서 li 5개를 손으로 복붙했던 걸 JS 로 바꾸는 연습입니다.
+      // ▶ 기대 결과: [li 개수, 이미지 파일명들, alt 들]
+      //   → [5, ["sns1.jpg", ..., "sns5.jpg"], ["instagram 1", ..., "instagram 5"]]
+      const snsFiles = ["sns1.jpg", "sns2.jpg", "sns3.jpg", "sns4.jpg", "sns5.jpg"]; // (수정하지 마세요)
+      // 여기에 작성
+
+      const snsImgs = document.querySelectorAll(".sns li a img"); // (수정하지 마세요)
+      check(
+        10,
+        [
+          document.querySelectorAll(".sns > li").length,
+          [...snsImgs].map((img) => img.getAttribute("src").split("/").pop()),
+          [...snsImgs].map((img) => img.alt),
+        ],
+        [
+          5,
+          ["sns1.jpg", "sns2.jpg", "sns3.jpg", "sns4.jpg", "sns5.jpg"],
+          ["instagram 1", "instagram 2", "instagram 3", "instagram 4", "instagram 5"],
+        ],
+      );
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 11] [CSS] 사진 비율이 달라도 네모 칸에 꽉 채우기 : object-fit
+      //
+      // ▶ 대상 HTML (문제 10 에서 만든 것)
+      //   <ul class="sns">
+      //     <li><a href="#"><img src="...sns1.jpg" alt="instagram 1" /></a></li>
+      //     ... 5개
+      //   </ul>
+      // ▶ 이미 적용된 CSS
+      //   .sns li { width: 80px; height: 80px; flex: none; background: #eee; }
+      //   .sns a  { display: block; width: 100%; height: 100%; }
+      //   → 지금은 사진이 원래 크기대로 튀어나와 있습니다.
+      // ▶ 만들 것
+      //   (a) .sns li  : 넘치는 부분 숨기기 + 모서리 둥글게 12px
+      //   (b) .sns img : 칸을 가로세로 꽉 채우되, 사진이 찌그러지지 않게 잘라서 채우기
+      // ▶ 힌트
+      //   - 넘침 숨기기: overflow: hidden;   (이게 있어야 border-radius 밖으로 사진이 안 삐져나옴)
+      //   - 꽉 채우기: width: 100%; height: 100%;
+      //   - 그냥 100% 로만 채우면 사진이 찌그러집니다 → object-fit: cover;
+      //     (배경 이미지의 background-size: cover 와 같은 역할을 <img> 에 해 주는 속성)
+      // ▶ 기대 결과: [li 의 overflow, li 의 border-radius, img 의 object-fit, img 가 li 와 크기가 같은지]
+      //   → ["hidden", "12px", "cover", true]
+      css(`
+        /* 여기에 작성 */
+
+      `);
+
+      const snsLi = document.querySelector(".sns li"); // (수정하지 마세요)
+      const snsImg = document.querySelector(".sns li img");
+      check(
+        11,
+        snsLi && snsImg
+          ? [
+              cs(snsLi).overflow,
+              cs(snsLi).borderTopLeftRadius,
+              cs(snsImg).objectFit,
+              snsImg.offsetWidth === snsLi.clientWidth &&
+                snsImg.offsetHeight === snsLi.clientHeight,
+            ]
+          : "문제 10 을 먼저 푸세요",
+        ["hidden", "12px", "cover", true],
+      );
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 12] [JS] 스크롤하면 header 에 sc 붙이기
+      //
+      // ▶ 배경: 원본 common.css 에는 header.sc { backdrop-filter: blur(10px); ... } 가 있는데
+      //         정작 sc 를 붙이는 JS 는 없습니다. 그걸 만들어 봅니다.
+      // ▶ 대상 HTML: <header> ... </header>
+      // ▶ 이미 적용된 CSS
+      //   header.sc .inner { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); }
+      // ▶ 만들 것
+      //   (a) 함수 updateHeader(y) 완성 : y 가 100 "초과"면 header 에 sc 추가, 아니면 sc 제거
+      //   (b) window 에 scroll 이벤트를 걸어서, 스크롤할 때마다 updateHeader(window.scrollY) 실행
+      // ▶ 힌트
+      //   - if (y > 100) { add } else { remove }
+      //   - 한 줄 버전: 요소.classList.toggle("sc", y > 100)
+      //       toggle 의 두 번째 인자가 true 면 무조건 추가, false 면 무조건 제거합니다.
+      //   - window.scrollY : 지금 페이지가 위에서부터 몇 px 내려왔는지
+      // ▶ 기대 결과: updateHeader(300) → true, (50) → false, (100) → false,
+      //              scroll 이벤트 → 지금 스크롤 위치가 100 넘는지와 같아야 함
+      //   ※ 다 풀고 페이지를 내렸다 올리면 header 상단 바 색이 바뀝니다.
+      function updateHeader(y) {
+        // 여기에 작성
+      }
+      // 여기에 작성 (scroll 이벤트)
+
+      const hasSc = () => $header.classList.contains("sc"); // (수정하지 마세요)
+      updateHeader(300);
+      const s12a = hasSc();
+      updateHeader(50);
+      const s12b = hasSc();
+      updateHeader(300);
+      updateHeader(100);
+      const s12c = hasSc();
+      updateHeader(300);
+      window.dispatchEvent(new Event("scroll"));
+      check(12, [s12a, s12b, s12c, hasSc()], [
+        true,
+        false,
+        false,
+        window.scrollY > 100,
+      ]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 13] [JS] 메뉴 닫기 함수 + ESC 키로 닫기
+      //
+      // ▶ 대상 HTML: <header> (on 이 붙으면 메뉴 열림), <body> (lock 이 붙으면 스크롤 잠금)
+      // ▶ 만들 것
+      //   (a) 함수 closeMenu() 완성 : header 에서 on 제거, body 에서 lock 제거
+      //   (b) document 에 keydown 이벤트를 걸어서, 누른 키가 ESC 일 때만 closeMenu() 실행
+      // ▶ 힌트
+      //   - 닫기는 toggle 이 아니라 remove 입니다. (이미 닫혀 있을 때 눌러도 열리면 안 되니까)
+      //   - 누른 키 이름: e.key   → ESC 키는 "Escape", 엔터는 "Enter"
+      //   - closeMenu 는 함수 "이름"만 넘기거나, 안에서 closeMenu() 로 "호출"하거나 둘 중 하나로.
+      // ▶ 기대 결과: 메뉴 연 상태에서 Enter → [true, true] (안 닫힘), Escape → [false, false]
+      function closeMenu() {
+        // 여기에 작성
+      }
+      // 여기에 작성 (keydown 이벤트)
+
+      const pressKey = (key) =>
+        document.dispatchEvent(
+          new KeyboardEvent("keydown", { key, bubbles: true }),
+        ); // (수정하지 마세요)
+      $header.classList.add("on");
+      document.body.classList.add("lock");
+      pressKey("Enter");
+      const s13a = menuState();
+      pressKey("Escape");
+      check(13, [s13a, menuState()], [
+        [true, true],
+        [false, false],
+      ]);
+
+      // ─────────────────────────────────────────────────────────
+      // [문제 14] ★ 종합 [JS] 메뉴 링크를 누르면 메뉴 닫기
+      //
+      // ▶ 대상 HTML
+      //   <div class="gnb">
+      //     <ul>
+      //       <li><a href="#brand">Brand</a></li>
+      //       <li><a href="#products">Products</a></li>
+      //       <li><a href="#oem">OEM/ODM</a></li>
+      //       <li><a href="#contact">Contact</a></li>
+      //     </ul>
+      //   </div>
+      // ▶ 만들 것: gnb 안의 a 를 클릭하면
+      //   ① 기본 동작(주소창에 #brand 붙으며 이동) 막기
+      //   ② 문제 13 의 closeMenu() 를 "재사용"해서 메뉴 닫기
+      // ▶ 힌트
+      //   - document.querySelectorAll("header .gnb a") → forEach 로 하나씩 click 이벤트
+      //   - 닫는 코드를 또 쓰지 말고 closeMenu() 를 호출하세요. 함수를 만든 이유가 이것!
+      //   - e.preventDefault()  (isotope 퀴즈 문제 4 참고)
+      // ▶ 기대 결과: 메뉴 연 상태에서 Products 클릭 → [기본동작 실행됨 false, [false, false]]
+      // 여기에 작성
+
+      $header.classList.add("on"); // (수정하지 마세요)
+      document.body.classList.add("lock");
+      const r14 = fakeClick(document.querySelectorAll("header .gnb a")[1]);
+      check(14, [r14, menuState()], [false, [false, false]]);
+    </script>
+  </body>
+</html>
