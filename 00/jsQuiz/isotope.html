@@ -387,8 +387,10 @@
       // ▶ 기대 결과: [andResult, orResult] → [[3], [2, 3, 4, 6, 8]]
       let andResult, orResult;
       // 여기에 작성
-      andResult = iso.arrange({filter : '.odd.hot'});
-      orResult = iso.arrange({filter:'.even, .hot'});
+      iso.arrange({ filter: ".odd.hot" });
+      andResult = shown(iso);
+      iso.arrange({ filter: ".even, .hot" });
+      orResult = shown(iso);
 
       check(9, [andResult, orResult], [[3], [2, 3, 4, 6, 8]]);
 
@@ -406,6 +408,16 @@
       // ▶ 기대 결과: [[5, 6, 7, 8], [1, 2, 3, 4, 5, 6, 7, 8]]
       let bigResult, allResult;
       // 여기에 작성
+      iso.arrange({
+        filter: function (itemElem) {
+          return Number(itemElem.dataset.num) >= 5;
+          true / false;
+        },
+      });
+      bigResult = shown(iso);
+
+      iso.arrange({ filter: "*" });
+      allResult = shown(iso);
 
       check(
         10,
@@ -433,6 +445,19 @@
       // ▶ 기대 결과: EVEN → ODD → ALL 순서로 클릭했을 때
       //     [기본동작 막힘 false, [보이는 번호, on 상태] × 3]
       // 여기에 작성
+
+      for (let btn of btns) {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          iso.arrange({
+            filter: e.currentTarget.querySelector("a").getAttribute("href"),
+          });
+          for (let b of btns) {
+            b.classList.remove("on");
+          }
+          e.currentTarget.classList.add("on");
+        });
+      }
 
       const menuLis = document.querySelectorAll("#menu li"); // (수정하지 마세요)
       const clickLi = (i) =>
@@ -485,6 +510,12 @@
       // ▶ 기대 결과: [layoutMode, 정렬 순서] → ["fitRows", ["Banana", "Durian", "Apple", "Cherry"]]
       let iso2;
       // 여기에 작성
+      iso2 = new Isotope("#grid2", {
+        itemSelector: ".card",
+        layoutMode: "fitRows",
+        getSortData: { price: "[data-price] parseInt", name: "h3" },
+        sortBy: "price",
+      });
 
       check(
         12,
@@ -505,6 +536,11 @@
       // ▶ 기대 결과: [["Cherry", "Apple", "Durian", "Banana"], ["Apple", "Banana", "Cherry", "Durian"]]
       let descResult, nameResult;
       // 여기에 작성
+      iso2.arrange({ sortBy: "price", sortAscending: false });
+      descResult = names(iso2);
+
+      iso2.arrange({ sortBy: "name", sortAscending: true });
+      nameResult = names(iso2);
 
       check(
         13,
@@ -530,6 +566,11 @@
       // ▶ 기대 결과: 약 1.5초 뒤 채점 → 2  (결과가 늦게 표시됩니다)
       let completeCount = 0;
       // 여기에 작성
+
+      iso.once("arrangeComplete", (filteredItems) => {
+        completeCount = filteredItems.length;
+      });
+      iso.arrange({ filter: ".hot" });
 
       setTimeout(() => check(14, completeCount, 2), 1500); // (수정하지 마세요)
     </script>

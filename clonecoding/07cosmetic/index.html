@@ -4,9 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cosmetic</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/main_style.css" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/common.js"></script>
   </head>
   <body>
@@ -104,7 +110,7 @@
       <!-- //.main_visual -->
       <section class="brand_story">
         <div class="inner">
-          <div class="img_box"></div>
+          <div data-aos="zoom-in-up"  data-aos-duration="1000" class="img_box"></div>
           <!-- //.img_box -->
           <h3>Cosmetics<br />with Nature</h3>
           <div class="txt_box">
@@ -134,28 +140,28 @@
           <!-- //.txt_box -->
           <div class="right_box">
             <ul>
-              <li>
+              <li data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-anchor-placement="top-center">
                 <a href="#">
                   <strong>Cherie by Yul</strong>
                   <span>쉐리 레이디언스 세럼</span>
                   <em>96,000 won</em>
                 </a>
               </li>
-              <li>
+              <li data-aos="flip-right" data-aos-delay="100" data-aos-duration="1000">
                 <a href="#">
                   <strong>Cherie by Yul</strong>
                   <span>쉐리 레이디언스 세럼</span>
                   <em>96,000 won</em>
                 </a>
               </li>
-              <li>
+              <li data-aos="flip-left" data-aos-delay="150" data-aos-duration="1000" data-aos-easing="ease-in-out">
                 <a href="#">
                   <strong>Cherie by Yul</strong>
                   <span>쉐리 레이디언스 세럼</span>
                   <em>96,000 won</em>
                 </a>
               </li>
-              <li>
+              <li data-aos="flip-right" data-aos-delay="200" data-aos-duration="1000">
                 <a href="#">
                   <strong>Cherie by Yul</strong>
                   <span>쉐리 레이디언스 세럼</span>
@@ -174,7 +180,7 @@
           <h3>Our<br />Business</h3>
           <div class="list">
             <ul>
-              <li>
+              <li data-aos="zoom-out-down" data-aos-delay="50" data-aos-duration="1000">
                 <a href="#">
                   <h4>R&D</h4>
                   <p>
@@ -184,7 +190,7 @@
                   </p>
                 </a>
               </li>
-              <li>
+              <li data-aos="zoom-out" data-aos-delay="100" data-aos-duration="1000">
                 <a href="#">
                   <h4>OEM/ODM</h4>
                   <p>
@@ -193,7 +199,7 @@
                   </p>
                 </a>
               </li>
-              <li>
+              <li data-aos="zoom-out-up" data-aos-delay="150" data-aos-duration="1000">
                 <a href="#">
                   <h4>ECO Farm</h4>
                   <p>
@@ -209,23 +215,72 @@
         <!-- //.inner -->
       </section>
       <!-- //.our_business -->
-       <section class="instagram">
+      <section class="instagram">
         <div class="inner">
           <p>@yulcell_official</p>
           <h3>Instagram</h3>
           <div class="list">
             <ul>
-              <li><a href="#"><img src="./asset/img/sns1.jpg" alt=""></a></li>
-              <li><a href="#"><img src="./asset/img/sns2.jpg" alt=""></a></li>
-              <li><a href="#"><img src="./asset/img/sns3.jpg" alt=""></a></li>
-              <li><a href="#"><img src="./asset/img/sns4.jpg" alt=""></a></li>
-              <li><a href="#"><img src="./asset/img/sns5.jpg" alt=""></a></li>
+              <li data-aos="fade-down" data-aos-easing="linear" data-aos-duration="300">
+                <a href="#"><img src="./asset/img/sns1.jpg" alt="" /></a>
+              </li>
+              <li data-aos="fade-down" data-aos-easing="linear" data-aos-duration="600">
+                <a href="#"><img src="./asset/img/sns2.jpg" alt="" /></a>
+              </li>
+              <li data-aos="fade-down" data-aos-easing="linear" data-aos-duration="900">
+                <a href="#"><img src="./asset/img/sns3.jpg" alt="" /></a>
+              </li>
+              <li data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1200">
+                <a href="#"><img src="./asset/img/sns4.jpg" alt="" /></a>
+              </li>
+              <li data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500">
+                <a href="#"><img src="./asset/img/sns5.jpg" alt="" /></a>
+              </li>
             </ul>
-          </div><!-- //.list -->
-        </div><!-- //.inner -->
-       </section><!-- //.instagram -->
+          </div>
+          <!-- //.list -->
+        </div>
+        <!-- //.inner -->
+      </section>
+      <!-- //.instagram -->
+      <footer>
+        <div class="inner">
+          <div class="logo">yulcell</div>
+          <ul class="list">
+            <li>(주)율컴퍼니회장 : 최율희</li>
+            <li>사업자등록번호 : 000-00-000000</li>
+            <li>통신판매업 신고번호 : 제 2025-00호</li>
+            <li>
+              주소 : 서울특별시 서초구 서초대로77길 41(대동2빌딩 5,9,10층)
+            </li>
+            <li>제품문의 : 0000-0000</li>
+            <li>FAX : 000-000-0000</li>
+            <li>E-mail : yul_ssem@yul.co.kr</li>
+          </ul>
+          <!-- //.list -->
+          <ul class="sns">
+            <li>
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </li>
+          </ul>
+          <!-- //.sns -->
+        </div>
+        <!-- //.inner -->
+        <div class="bottom">
+          <p>copyright ⓒ 2026 yulssem CO. LTD All Rights Reserved.</p>
+        </div>
+        <!-- //.bottom -->
+      </footer>
+      <!-- //footer -->
     </main>
-
-    <footer></footer>
   </body>
 </html>
