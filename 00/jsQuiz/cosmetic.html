@@ -250,9 +250,9 @@
       적용됩니다.<br />
       <b>새로운 점 ③</b>: 채점 결과는 화면 오른쪽에 따라다닙니다.<br />
       규칙: ① <code>check(...)</code> 와 "(수정하지 마세요)" 코드는 건드리지
-      않습니다. ② 위에서부터 <b>순서대로</b> 푸세요. (문제 10 에서 만든
-      SNS 목록을 문제 11 에서 씁니다.) ③ 문법 오류가 나면 그 아래 문제는 채점이
-      안 되니 F12 콘솔을 확인하세요.
+      않습니다. ② 위에서부터 <b>순서대로</b> 푸세요. (문제 10 에서 만든 SNS
+      목록을 문제 11 에서 씁니다.) ③ 문법 오류가 나면 그 아래 문제는 채점이 안
+      되니 F12 콘솔을 확인하세요.
     </p>
 
     <div class="layout">
@@ -381,14 +381,15 @@
       // ▶ 기대 결과: ["rgb(255, 118, 117)", "rgb(255, 255, 255)"]
       css(`
         /* 여기에 작성 */
-
+        header .fix .gnb {background: var(--main-rpink); color: var(--w-color);}
       `);
 
       const gnb = document.querySelector("header .fix .gnb"); // (수정하지 마세요)
-      check(1, [cs(gnb).backgroundColor, cs(gnb).color], [
-        "rgb(255, 118, 117)",
-        "rgb(255, 255, 255)",
-      ]);
+      check(
+        1,
+        [cs(gnb).backgroundColor, cs(gnb).color],
+        ["rgb(255, 118, 117)", "rgb(255, 255, 255)"],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 2] [CSS] :last-child 로 마지막 구분선 없애기
@@ -411,7 +412,7 @@
       // ▶ 기대 결과: 각 li 의 테두리 스타일 → ["solid", "solid", "none"]
       css(`
         /* 여기에 작성 */
-
+        header .lang li:last-child {border-right: 0;}
       `);
 
       check(
@@ -444,15 +445,25 @@
       // ▶ 기대 결과: 한 번 클릭 [true, true], 두 번 클릭 [false, false]
       //   ※ 문제 4 를 풀면 화면의 ≡ 버튼을 눌러 메뉴가 열리는 걸 직접 볼 수 있습니다.
       // 여기에 작성
+      const $ha = document.querySelector(".ham");
+      const $hdr = document.querySelector("header");
+      $ha.addEventListener("click", () => {
+        $hdr.classList.toggle("on");
+        document.body.classList.toggle("lock");
+      });
 
       const $ham = document.querySelector(".ham"); // (수정하지 마세요)
       fakeClick($ham);
       const s3a = menuState();
       fakeClick($ham);
-      check(3, [s3a, menuState()], [
-        [true, true],
-        [false, false],
-      ]);
+      check(
+        3,
+        [s3a, menuState()],
+        [
+          [true, true],
+          [false, false],
+        ],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 4] [CSS] 화면 밖에 숨긴 메뉴 꺼내기 + 선택자 우선순위
@@ -475,7 +486,7 @@
       // ▶ 기대 결과: [on 없을 때 right 가 음수인지, on 있을 때 right] → [true, "0px"]
       css(`
         /* 여기에 작성 */
-
+        header.on .fix { right: 0;}
       `);
 
       // 채점 중에는 transition 을 잠깐 끕니다 (수정하지 마세요)
@@ -516,6 +527,8 @@
       // ▶ 기대 결과: [0.2, 0.4, 0.6, 0.8]
       //   ※ 다 풀고 ≡ 버튼을 누르면 메뉴 글자가 하나씩 차례로 올라옵니다.
       // 여기에 작성
+      const $del = document.querySelectorAll("header .fix .gnb > ul > li");
+      $del.forEach((li, index) => {li.style.transitionDelay = `${0.2 * (index + 1)}s`})
 
       check(
         5,
@@ -546,11 +559,16 @@
       // ▶ 기대 결과: [["flip-left", "flip-right", "flip-left", "flip-right"], [50, 100, 150, 200]]
       let aosNames, aosDelays;
       // 여기에 작성
+      
 
-      check(6, [aosNames, aosDelays], [
-        ["flip-left", "flip-right", "flip-left", "flip-right"],
-        [50, 100, 150, 200],
-      ]);
+      check(
+        6,
+        [aosNames, aosDelays],
+        [
+          ["flip-left", "flip-right", "flip-left", "flip-right"],
+          [50, 100, 150, 200],
+        ],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 7] [CSS] :nth-child(2n) 으로 지그재그 배치
@@ -649,10 +667,14 @@
         const half = `${$plus.clientWidth / 2}px`;
         return [s.position, s.left === half && s.top === half, s.transform];
       };
-      check(9, [barInfo("::before"), barInfo("::after")], [
-        ["absolute", true, "matrix(1, 0, 0, 1, -1, -8)"],
-        ["absolute", true, "matrix(1, 0, 0, 1, -8, -1)"],
-      ]);
+      check(
+        9,
+        [barInfo("::before"), barInfo("::after")],
+        [
+          ["absolute", true, "matrix(1, 0, 0, 1, -1, -8)"],
+          ["absolute", true, "matrix(1, 0, 0, 1, -8, -1)"],
+        ],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 10] [JS] 배열로 인스타그램 목록 만들기 : map + 템플릿 문자열 + join
@@ -672,7 +694,13 @@
       //   - 원본 index.html 에서 li 5개를 손으로 복붙했던 걸 JS 로 바꾸는 연습입니다.
       // ▶ 기대 결과: [li 개수, 이미지 파일명들, alt 들]
       //   → [5, ["sns1.jpg", ..., "sns5.jpg"], ["instagram 1", ..., "instagram 5"]]
-      const snsFiles = ["sns1.jpg", "sns2.jpg", "sns3.jpg", "sns4.jpg", "sns5.jpg"]; // (수정하지 마세요)
+      const snsFiles = [
+        "sns1.jpg",
+        "sns2.jpg",
+        "sns3.jpg",
+        "sns4.jpg",
+        "sns5.jpg",
+      ]; // (수정하지 마세요)
       // 여기에 작성
 
       const snsImgs = document.querySelectorAll(".sns li a img"); // (수정하지 마세요)
@@ -686,7 +714,13 @@
         [
           5,
           ["sns1.jpg", "sns2.jpg", "sns3.jpg", "sns4.jpg", "sns5.jpg"],
-          ["instagram 1", "instagram 2", "instagram 3", "instagram 4", "instagram 5"],
+          [
+            "instagram 1",
+            "instagram 2",
+            "instagram 3",
+            "instagram 4",
+            "instagram 5",
+          ],
         ],
       );
 
@@ -767,12 +801,11 @@
       const s12c = hasSc();
       updateHeader(300);
       window.dispatchEvent(new Event("scroll"));
-      check(12, [s12a, s12b, s12c, hasSc()], [
-        true,
-        false,
-        false,
-        window.scrollY > 100,
-      ]);
+      check(
+        12,
+        [s12a, s12b, s12c, hasSc()],
+        [true, false, false, window.scrollY > 100],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 13] [JS] 메뉴 닫기 함수 + ESC 키로 닫기
@@ -800,10 +833,14 @@
       pressKey("Enter");
       const s13a = menuState();
       pressKey("Escape");
-      check(13, [s13a, menuState()], [
-        [true, true],
-        [false, false],
-      ]);
+      check(
+        13,
+        [s13a, menuState()],
+        [
+          [true, true],
+          [false, false],
+        ],
+      );
 
       // ─────────────────────────────────────────────────────────
       // [문제 14] ★ 종합 [JS] 메뉴 링크를 누르면 메뉴 닫기

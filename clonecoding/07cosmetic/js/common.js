@@ -24,4 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
   gnbItems.forEach((li, index) => {
     li.style.transitionDelay = `${0.2 * (index + 1)}s`;
   });
+
+  //스크롤시 header 색상 바꾸기, blur 바꾸기
+  window.addEventListener('scroll',()=> {
+    const st = window.scrollY;
+    // console.log(st);
+    if (st >= 80) {
+      $header.classList.add('sc')
+    } else {
+      $header.classList.remove('sc')
+    }
+  })
+
 }); //end
